@@ -135,8 +135,8 @@ export default function App() {
     messageText += `Aguardo as instruções para pagamento via Pix e liberação do pedido.`;
 
     const encodedMessage = encodeURIComponent(messageText);
-    // WhatsApp number for IR3H store (placeholder, can be edited by client)
-    const whatsappNumber = '5511999999999'; 
+    // WhatsApp number for IR3H store
+    const whatsappNumber = '5527988003025'; 
     const waLink = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`;
 
     // Clean cart after a short delay so they see success first, then redirect
@@ -333,9 +333,9 @@ export default function App() {
               <p className="app-banner__sub">Fale conosco pelo WhatsApp se tiver dúvidas.</p>
             </div>
           </div>
-          <button 
+           <button 
             className="app-banner__btn"
-            onClick={() => window.open('https://api.whatsapp.com/send?phone=5511999999999&text=Olá,%20tenho%20uma%20dúvida%20sobre%20os%20créditos%20IMVU.', '_blank')}
+            onClick={() => window.open('https://api.whatsapp.com/send?phone=5527988003025&text=Olá,%20tenho%20uma%20dúvida%20sobre%20os%20créditos%20IMVU.', '_blank')}
           >
             Suporte
           </button>
