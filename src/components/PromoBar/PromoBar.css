@@ -1,0 +1,33 @@
+.promo-bar {
+  background: var(--brand-primary);
+  overflow: hidden;
+  height: 28px;
+  display: flex;
+  align-items: center;
+}
+
+.promo-bar__track {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  animation: ticker 22s linear infinite;
+  white-space: nowrap;
+}
+
+.promo-bar__item {
+  font-size: var(--font-xs);
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: .3px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.promo-bar__all-badges-img {
+  height: 18px;
+  width: auto;
+  object-fit: contain;
+  margin-right: 8px;
+  vertical-align: middle;
+}

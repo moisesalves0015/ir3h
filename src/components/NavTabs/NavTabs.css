@@ -1,0 +1,41 @@
+.nav-tabs-wrap {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 48px;
+  z-index: 90;
+}
+
+.nav-tabs {
+  position: relative;
+  display: flex;
+  overflow-x: auto;
+  gap: 0;
+  padding: 0 var(--space-2);
+  scrollbar-width: none;
+}
+.nav-tabs::-webkit-scrollbar { display: none; }
+
+.nav-tab {
+  flex-shrink: 0;
+  padding: var(--space-3) var(--space-3);
+  font-size: var(--font-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  position: relative;
+  transition: color var(--transition);
+}
+.nav-tab--active {
+  color: var(--brand-primary);
+  font-weight: 700;
+}
+
+.nav-tabs__indicator {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  background: var(--brand-primary);
+  border-radius: var(--radius-full);
+  transition: left .25s ease, width .25s ease;
+}

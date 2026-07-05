@@ -1,0 +1,12 @@
+.pgrid-section {
+  background: var(--color-surface);
+  margin-top: var(--space-2);
+}
+
+.pgrid {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3) var(--space-4);
+}
+.pgrid--col2 { grid-template-columns: repeat(2, 1fr); }
+.pgrid--col3 { grid-template-columns: repeat(3, 1fr); }

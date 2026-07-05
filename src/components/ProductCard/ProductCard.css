@@ -1,0 +1,204 @@
+.pcard {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition), box-shadow var(--transition);
+  animation: fadeIn .35s ease both;
+}
+.pcard:active { transform: scale(.97); }
+
+/* ── Grid variant ── */
+.pcard--grid .pcard__img-wrap {
+  aspect-ratio: 3/4;
+  position: relative;
+  overflow: hidden;
+  background: #f9f9f9;
+}
+.pcard--grid .pcard__img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .4s ease;
+}
+.pcard--grid:hover .pcard__img-wrap img { transform: scale(1.06); }
+
+/* ── Flash variant ── */
+.pcard--flash .pcard__img-wrap {
+  aspect-ratio: 1/1;
+  position: relative;
+  overflow: hidden;
+  background: #f9f9f9;
+}
+.pcard--flash .pcard__img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pcard--flash .pcard__tagline {
+  font-size: 8px !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* Badge */
+.pcard__badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  z-index: 2;
+  font-size: 9px;
+}
+
+/* Heart */
+.pcard__heart {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 2;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  backdrop-filter: blur(4px);
+  transition: color var(--transition), transform var(--transition);
+}
+.pcard__heart--active { color: var(--brand-primary); }
+.pcard__heart:active { transform: scale(1.25); }
+
+/* Cart button */
+.pcard__cart-btn {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+  background: rgba(139, 92, 246, 0.92);
+  color: white;
+  font-size: var(--font-sm);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transform: translateY(100%);
+  transition: transform var(--transition), background var(--transition);
+  backdrop-filter: blur(4px);
+}
+.pcard:hover .pcard__cart-btn,
+.pcard__cart-btn--added { transform: translateY(0); }
+.pcard__cart-btn--added { background: rgba(34,197,94,.92); }
+
+/* Info */
+.pcard__info {
+  padding: var(--space-2) var(--space-2) var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.pcard__title {
+  font-size: var(--font-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.pcard__colors {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+}
+.pcard__color-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0,0,0,.12);
+}
+.pcard__colors-more {
+  font-size: 9px;
+  color: var(--text-muted);
+}
+
+.pcard__price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+.pcard__price {
+  font-size: var(--font-md);
+  font-weight: 700;
+  color: var(--text-price);
+}
+.pcard__original {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.pcard__meta {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.pcard__star { color: var(--brand-secondary); }
+.pcard__rating {
+  font-size: var(--font-xs);
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.pcard__sold {
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  margin-left: 4px;
+}
+
+/* Alternating Footer Animations */
+.pcard__footer-switch {
+  height: 18px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 2px;
+}
+
+.pcard__footer-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.pcard__footer-slide--visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.pcard__footer-slide--hidden-up {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pcard__footer-slide--hidden-down {
+  transform: translateY(100%);
+  opacity: 0;
+  pointer-events: none;
+}
