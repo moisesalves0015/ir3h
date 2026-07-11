@@ -1,0 +1,186 @@
+.cat-page {
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.3s ease both;
+}
+
+/* Header */
+.cat-page__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.cat-page__back {
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition);
+  flex-shrink: 0;
+}
+.cat-page__back:hover { color: var(--text-primary); }
+
+.cat-page__header-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex: 1;
+}
+
+.cat-page__emoji { font-size: 20px; }
+
+.cat-page__title {
+  font-size: var(--font-lg);
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+/* Hero */
+.cat-page__hero {
+  position: relative;
+  height: 140px;
+  overflow: hidden;
+}
+
+.cat-page__hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.5);
+}
+
+.cat-page__hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-3) var(--space-4);
+  background: linear-gradient(to top, rgba(15,10,25,0.9) 0%, transparent 70%);
+}
+
+.cat-page__description {
+  font-size: var(--font-sm);
+  color: rgba(255,255,255,0.85);
+  line-height: 1.5;
+}
+
+/* Controls bar */
+.cat-page__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 53px;
+  z-index: 40;
+}
+
+.cat-page__count {
+  font-size: var(--font-sm);
+  color: var(--text-muted);
+}
+
+.cat-page__controls-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.cat-page__sort-wrap {
+  position: relative;
+}
+
+.cat-page__control-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  padding: 5px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  transition: all var(--transition);
+  background: rgba(255,255,255,0.04);
+}
+.cat-page__control-btn:hover {
+  border-color: var(--brand-primary);
+  color: var(--brand-primary-light);
+}
+
+.cat-page__control-btn--icon {
+  padding: 5px 8px;
+}
+
+/* Sort dropdown */
+.cat-page__sort-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  z-index: 100;
+  min-width: 160px;
+  animation: fadeIn 0.15s ease both;
+}
+
+.cat-page__sort-option {
+  display: block;
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+  transition: background var(--transition), color var(--transition);
+}
+.cat-page__sort-option:last-child { border-bottom: none; }
+.cat-page__sort-option:hover { background: rgba(139, 92, 246, 0.1); color: var(--text-primary); }
+.cat-page__sort-option.active { color: var(--brand-primary-light); font-weight: 700; }
+
+/* Pills (all categories view) */
+.cat-page__pills {
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.cat-page__pill {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: var(--radius-full);
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+.cat-page__pill:hover {
+  background: var(--brand-primary);
+  color: white;
+  border-color: var(--brand-primary);
+}
+
+/* Empty state */
+.cat-page__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 64px var(--space-4);
+  color: var(--text-muted);
+  text-align: center;
+  font-size: var(--font-base);
+}

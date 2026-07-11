@@ -57,3 +57,11 @@
   line-height: 1.2;
   white-space: nowrap;
 }
+
+.cat-count {
+  font-size: 9px;
+  color: var(--text-muted);
+  background: rgba(139, 92, 246, 0.1);
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+}

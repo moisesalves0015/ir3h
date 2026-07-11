@@ -1,0 +1,139 @@
+.search-page {
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.3s ease both;
+}
+
+.search-page__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.search-page__back {
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  flex-shrink: 0;
+  transition: color var(--transition);
+}
+.search-page__back:hover { color: var(--text-primary); }
+
+.search-page__input-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  padding: 6px 12px;
+  gap: var(--space-2);
+  transition: border-color var(--transition);
+}
+.search-page__input-wrap:focus-within { border-color: var(--brand-primary); }
+
+.search-page__icon { color: var(--text-muted); flex-shrink: 0; }
+
+.search-page__input {
+  flex: 1;
+  font-size: var(--font-sm);
+  color: var(--text-primary);
+  background: none;
+  border: none;
+  outline: none;
+  font-family: var(--font-family);
+}
+.search-page__input::placeholder { color: var(--text-muted); }
+.search-page__input::-webkit-search-cancel-button { display: none; }
+
+.search-page__clear {
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  transition: color var(--transition);
+}
+.search-page__clear:hover { color: var(--brand-primary); }
+
+.search-page__search-btn {
+  flex-shrink: 0;
+  font-size: var(--font-sm);
+  font-weight: 700;
+  color: var(--brand-primary-light);
+  padding: 6px 10px;
+  border-radius: var(--radius-md);
+  transition: color var(--transition);
+}
+.search-page__search-btn:hover { color: var(--text-primary); }
+
+/* Body */
+.search-page__body {
+  padding: var(--space-4);
+}
+
+.search-page__section-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-sm);
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Popular chips */
+.search-page__popular-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.search-page__chip {
+  padding: 6px 14px;
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: var(--radius-full);
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  transition: all var(--transition);
+}
+.search-page__chip:hover {
+  background: var(--brand-primary);
+  color: white;
+  border-color: var(--brand-primary);
+}
+
+/* Results */
+.search-page__count {
+  font-size: var(--font-sm);
+  color: var(--text-muted);
+  margin-bottom: var(--space-3);
+}
+
+.search-page__count strong { color: var(--text-primary); }
+
+/* No results */
+.search-page__no-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 48px 0;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.search-page__no-results h3 {
+  font-size: var(--font-lg);
+  font-weight: 700;
+  color: var(--text-primary);
+}
