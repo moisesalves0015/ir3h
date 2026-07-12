@@ -218,7 +218,7 @@ export const recommendedProducts: Product[] = [
 export const heroBanners: Banner[] = [
   {
     id: 1,
-    image: '/images/banner_synth.png',
+    image: '/images/cover_all.png',
     label: 'IR3H Store — Créditos IMVU com Envio Imediato',
     bgGradient: 'linear-gradient(135deg,#5b21b6 0%,#db2777 100%)',
   },
