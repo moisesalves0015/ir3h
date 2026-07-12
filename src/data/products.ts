@@ -26,6 +26,7 @@ export interface Product {
   shortDescription: string;
   longDescription: string;
   price: number;
+  priceOnRequest?: boolean;
   originalPrice?: number;
   discount?: number;
   image: string;
@@ -540,9 +541,8 @@ const roomDecoracao: Product = {
   shortDescription: 'Pacote de decoração premium para transformar sua sala no IMVU.',
   longDescription:
     'Transforme sua sala do IMVU com um pacote completo de decoração premium! Inclui móveis, iluminação, objetos decorativos e temática personalizada. Sua sala vai se tornar o ponto de encontro favorito dos seus amigos no IMVU. Aplicamos todos os itens diretamente na sua sala.',
-  price: 59.90,
-  originalPrice: 85.00,
-  discount: 29,
+  price: 0,
+  priceOnRequest: true,
   image: '/images/rooms.png',
   badge: 'hot',
   rating: 4.9,
@@ -559,7 +559,7 @@ const roomDecoracao: Product = {
     { icon: '📸', text: 'Foto final da sala enviada para aprovação' },
   ],
   requirements: [
-    'Ter uma conta IMVU ativa com sala existente',
+    'Ter uma conta IMVU active com sala existente',
     'Fornecer acesso temporário via Login para aplicação',
     'Informar tema/estilo de preferência ao solicitar',
   ],
@@ -575,6 +575,238 @@ const roomDecoracao: Product = {
     { author: 'Bianca_room', avatar: '💜', rating: 5, text: 'Atendimento e resultado perfeitos. Sala dos sonhos!', date: '1 semana atrás' },
     { author: 'Leo_IMVU', avatar: '✨', rating: 5, text: 'Todos os amigos amaram. Nota 10!', date: '3 semanas atrás' },
   ],
+};
+
+const serviceCasamento: Product = {
+  id: 61,
+  slug: 'decoracao-casamento-imvu',
+  title: 'Serviço de Casamento IMVU',
+  shortDescription: 'Organização e decoração completa para o casamento dos seus sonhos no IMVU.',
+  longDescription:
+    'Realize o casamento perfeito no IMVU! Oferecemos assessoria completa, montagem do altar, recepção de convidados, iluminação especial, efeitos visuais, playlist e um ambiente romântico de alta qualidade para eternizar o seu momento.',
+  price: 0,
+  priceOnRequest: true,
+  image: '/images/services_banner.jpg',
+  badge: 'exclusive',
+  rating: 5.0,
+  reviews: 48,
+  sold: '120',
+  category: 'service',
+  deliveryTime: 'Agendamento prévio',
+  deliveryModes: ['login'],
+  benefits: [
+    { icon: '💒', text: 'Decoração temática e altar personalizado' },
+    { icon: '🎶', text: 'Assessoria visual e playlist temática' },
+    { icon: '📸', text: 'Ensaio fotográfico dos noivos incluído' },
+    { icon: '💬', text: 'Suporte completo durante a cerimônia' }
+  ],
+  requirements: [
+    'Ter uma conta IMVU ativa',
+    'Fornecer acesso temporário via Login para aplicação do cenário',
+    'Agendar data e horário com nossa equipe no WhatsApp'
+  ],
+  tags: ['serviço', 'casamento', 'imvu', 'romântico', 'festa'],
+  relatedIds: [32, 63],
+  reviews_data: [
+    { author: 'Lara_e_Dan', avatar: '💍', rating: 5, text: 'Foi lindo demais! Perfeito nos mínimos detalhes.', date: '5 dias atrás' }
+  ]
+};
+
+const serviceAniversario: Product = {
+  id: 62,
+  slug: 'decoracao-aniversario-imvu',
+  title: 'Serviço de Aniversário IMVU',
+  shortDescription: 'Sua festa de aniversário com decorações premium e diversão garantida.',
+  longDescription:
+    'Comemore seu aniversário em grande estilo no IMVU! Preparamos sua sala com balões, bolo interativo, pista de dança, efeitos especiais, luzes e áreas de pose exclusivas para fotos memoráveis com seus amigos.',
+  price: 0,
+  priceOnRequest: true,
+  image: '/images/services_banner.jpg',
+  badge: 'new',
+  rating: 4.9,
+  reviews: 32,
+  sold: '90',
+  category: 'service',
+  deliveryTime: 'Agendamento prévio',
+  deliveryModes: ['login'],
+  benefits: [
+    { icon: '🎂', text: 'Bolo temático e balões decorativos' },
+    { icon: '🕺', text: 'Pista de dança com efeitos especiais' },
+    { icon: '📸', text: 'Áreas de pose exclusivas para fotos' },
+    { icon: '🎁', text: 'Brinde virtual para o aniversariante' }
+  ],
+  requirements: [
+    'Ter uma conta IMVU ativa',
+    'Fornecer acesso temporário via Login para aplicação das decorações',
+    'Alinhamento do tema preferido com nossa equipe'
+  ],
+  tags: ['serviço', 'aniversário', 'imvu', 'festa', 'balada'],
+  relatedIds: [64, 32],
+  reviews_data: [
+    { author: 'Gaby_star', avatar: '🎉', rating: 5, text: 'Minha festa foi a melhor! Todo mundo curtiu muito.', date: '1 semana atrás' }
+  ]
+};
+
+const serviceRomanticRoom: Product = {
+  id: 63,
+  slug: 'room-romantica-imvu',
+  title: 'Room Romântica Premium IMVU',
+  shortDescription: 'Decoração de sala romântica com poses de casal e clima acolhedor.',
+  longDescription:
+    'Crie um refúgio acolhedor e apaixonante para você e seu par no IMVU. Sala decorada com lareira, pétalas de rosas, velas, poses de casal exclusivas e iluminação aconchegante de alta qualidade.',
+  price: 0,
+  priceOnRequest: true,
+  image: '/images/services_banner.jpg',
+  rating: 4.8,
+  reviews: 77,
+  sold: '210',
+  category: 'service',
+  deliveryTime: '24 a 48 horas',
+  deliveryModes: ['login'],
+  benefits: [
+    { icon: '❤️', text: 'Poses de casal românticas inclusas' },
+    { icon: '🌹', text: 'Pétalas, velas e lareira decorativa' },
+    { icon: '🕯️', text: 'Iluminação acolhedora sob medida' }
+  ],
+  requirements: [
+    'Ter uma conta IMVU ativa com sala existente',
+    'Acesso temporário via Login para aplicação'
+  ],
+  tags: ['serviço', 'romântico', 'sala', 'poses', 'imvu'],
+  relatedIds: [61, 32],
+  reviews_data: [
+    { author: 'Leo_love', avatar: '❤️', rating: 5, text: 'A sala ficou perfeita para passar o tempo com meu par.', date: '3 dias atrás' }
+  ]
+};
+
+const serviceBalada: Product = {
+  id: 64,
+  slug: 'decoracao-balada-imvu',
+  title: 'Serviço de Balada / Club IMVU',
+  shortDescription: 'Transforme sua sala em uma balada eletrônica premium e moderna.',
+  longDescription:
+    'Monte a sua própria balada no IMVU! Oferecemos cabine de DJ completa, lasers animados, painel de LED interativo, som surround configurado, pistas de dança iluminadas e decoração neon incrível.',
+  price: 0,
+  priceOnRequest: true,
+  image: '/images/services_banner.jpg',
+  badge: 'hot',
+  rating: 4.9,
+  reviews: 55,
+  sold: '140',
+  category: 'service',
+  deliveryTime: '24 a 48 horas',
+  deliveryModes: ['login'],
+  benefits: [
+    { icon: '🎧', text: 'Cabine de DJ e painéis LED modernos' },
+    { icon: '⚡', text: 'Lasers e luzes rítmicas animadas' },
+    { icon: '🕺', text: 'Pista de dança ampla para muitos amigos' }
+  ],
+  requirements: [
+    'Ter uma conta IMVU ativa com sala existente',
+    'Acesso temporário via Login para aplicação da estrutura'
+  ],
+  tags: ['serviço', 'balada', 'club', 'dj', 'festa', 'imvu'],
+  relatedIds: [62, 32],
+  reviews_data: [
+    { author: 'DJ_Tigo', avatar: '🎧', rating: 5, text: 'Ficou idêntico a um club real. Nota 1000!', date: '6 dias atrás' }
+  ]
+};
+
+const serviceVariado: Product = {
+  id: 65,
+  slug: 'servicos-variados-imvu',
+  title: 'Serviços Variados sob Encomenda',
+  shortDescription: 'Tem um projeto especial em mente? Nós criamos e aplicamos para você.',
+  longDescription:
+    'Precisa de um estilo de decoração específico que não está listado? Quer fazer uma alteração de layout na sua conta, salas temáticas, escritórios ou lounges? Entre em contato e desenvolvemos de acordo com seu orçamento e gosto.',
+  price: 0,
+  priceOnRequest: true,
+  image: '/images/services_banner.jpg',
+  rating: 5.0,
+  reviews: 19,
+  sold: '40',
+  category: 'service',
+  deliveryTime: 'A combinar',
+  deliveryModes: ['login', 'gift'],
+  benefits: [
+    { icon: '🎨', text: 'Projeto 100% sob medida para sua necessidade' },
+    { icon: '🤝', text: 'Atendimento e aprovação antes do pagamento' },
+    { icon: '✨', text: 'Total flexibilidade na criação visual' }
+  ],
+  requirements: [
+    'Explicar o projeto desejado para a nossa equipe no WhatsApp',
+    'Orçamento calculado com base na complexidade'
+  ],
+  tags: ['serviço', 'encomenda', 'customizado', 'personalizado', 'imvu'],
+  relatedIds: [32, 66],
+  reviews_data: [
+    { author: 'Carol_S', avatar: '⭐', rating: 5, text: 'Fizeram um lounge de praia incrível para mim. Muito atenciosos!', date: '2 semanas atrás' }
+  ]
+};
+
+const serviceCutout: Product = {
+  id: 66,
+  slug: 'cutout-sob-encomenda-imvu',
+  title: 'Cutout sob Encomenda IMVU',
+  shortDescription: 'Seu avatar IMVU recortado em alta resolução para edições e banners.',
+  longDescription:
+    'Obtenha o seu avatar recortado com fundo transparente (PNG/Cutout) em altíssima qualidade gráfica, com pose customizada, iluminação realista e retoque de cabelo/pele. Ideal para fotos de perfil, banners do Instagram ou capas de salas.',
+  price: 0,
+  priceOnRequest: true,
+  image: '/images/services_banner.jpg',
+  badge: 'hot',
+  rating: 4.9,
+  reviews: 84,
+  sold: '350',
+  category: 'service',
+  deliveryTime: '12 a 24 horas',
+  deliveryModes: ['gift'],
+  benefits: [
+    { icon: '✂️', text: 'Fundo transparente em formato PNG' },
+    { icon: '📸', text: 'Pose personalizada e tratamento de luz' },
+    { icon: '👩', text: 'Retoque de cabelo e textura de pele premium' }
+  ],
+  requirements: [
+    'Enviar print ou nick do avatar no IMVU',
+    'Especificar a pose e o estilo de retoque desejado'
+  ],
+  tags: ['serviço', 'cutout', 'edição', 'avatar', 'arte', 'imvu'],
+  relatedIds: [67, 65],
+  reviews_data: [
+    { author: 'Isa_bela', avatar: '🎨', rating: 5, text: 'Edição perfeita, meu avatar ficou maravilhoso!', date: '3 dias atrás' }
+  ]
+};
+
+const serviceBackground: Product = {
+  id: 67,
+  slug: 'background-personalizado-imvu',
+  title: 'Background Personalizado IMVU',
+  shortDescription: 'Criação de cenários de fundo 2D/3D premium para fotos do seu avatar.',
+  longDescription:
+    'Adicione um cenário de fundo espetacular para as suas fotos e montagens do IMVU. Desenvolvemos cenários urbanos, praias, salas de luxo, paisagens de fantasia ou baladas com alta definição e enquadramento de câmera perfeito.',
+  price: 0,
+  priceOnRequest: true,
+  image: '/images/services_banner.jpg',
+  rating: 4.8,
+  reviews: 62,
+  sold: '190',
+  category: 'service',
+  deliveryTime: '24 a 48 horas',
+  deliveryModes: ['gift'],
+  benefits: [
+    { icon: '🌅', text: 'Cenários realistas com alta definição' },
+    { icon: '📐', text: 'Perspectiva ajustada ao seu avatar' },
+    { icon: '🖥️', text: 'Arquivo final entregue em alta resolução' }
+  ],
+  requirements: [
+    'Especificar o tema do cenário desejado',
+    'Disponibilizar referências visuais caso possua'
+  ],
+  tags: ['serviço', 'background', 'cenário', 'foto', 'edição', 'imvu'],
+  relatedIds: [66, 65],
+  reviews_data: [
+    { author: 'Rick_G', avatar: '🌅', rating: 5, text: 'Melhorou 100% as minhas edições no Instagram. Recomendo!', date: '1 semana atrás' }
+  ]
 };
 
 // ─── NUDE ─────────────────────────────────────────────────────
@@ -855,6 +1087,13 @@ export const allProducts: Product[] = [
   accessPass,
   roomBasica,
   roomDecoracao,
+  serviceCasamento,
+  serviceAniversario,
+  serviceRomanticRoom,
+  serviceBalada,
+  serviceVariado,
+  serviceCutout,
+  serviceBackground,
   nudeSkinsAP,
   nudeRoupas,
   combo50kVipGold,
@@ -957,6 +1196,6 @@ export const categoryMeta: Record<string, { label: string; description: string; 
     description: 'Serviços especializados, decorações e personalizações para o seu avatar e conta IMVU.',
     emoji: '🔧',
     color: '#db2777',
-    image: '/images/cover_all.png',
+    image: '/images/services_banner.jpg',
   },
 };

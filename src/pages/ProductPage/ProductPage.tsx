@@ -143,17 +143,25 @@ export default function ProductPage() {
 
         {/* Price */}
         <div className="product-page__price-section">
-          <div className="product-page__price-row">
-            <span className="product-page__price">R$ {product.price.toFixed(2)}</span>
-            {product.originalPrice && (
-              <span className="product-page__original">R$ {product.originalPrice.toFixed(2)}</span>
-            )}
-          </div>
-          {product.discount && product.originalPrice && (
-            <div className="product-page__savings">
-              <CheckCircle size={13} />
-              Você economiza R$ {(product.originalPrice - product.price).toFixed(2)} ({product.discount}% off)
+          {product.priceOnRequest ? (
+            <div className="product-page__price-row">
+              <span className="product-page__price" style={{ color: 'var(--brand-accent)' }}>Sob Consulta</span>
             </div>
+          ) : (
+            <>
+              <div className="product-page__price-row">
+                <span className="product-page__price">R$ {product.price.toFixed(2)}</span>
+                {product.originalPrice && (
+                  <span className="product-page__original">R$ {product.originalPrice.toFixed(2)}</span>
+                )}
+              </div>
+              {product.discount && product.originalPrice && (
+                <div className="product-page__savings">
+                  <CheckCircle size={13} />
+                  Você economiza R$ {(product.originalPrice - product.price).toFixed(2)} ({product.discount}% off)
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>
@@ -286,7 +294,9 @@ export default function ProductPage() {
       <div className="product-page__sticky-cta">
         <div className="product-page__sticky-price">
           <span className="product-page__sticky-label">Total</span>
-          <span className="product-page__sticky-value">R$ {product.price.toFixed(2)}</span>
+          <span className="product-page__sticky-value">
+            {product.priceOnRequest ? 'Sob Consulta' : `R$ ${product.price.toFixed(2)}`}
+          </span>
         </div>
         <button
           className="product-page__buy-btn"

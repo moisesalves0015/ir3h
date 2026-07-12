@@ -77,7 +77,9 @@ export default function ProductModal({ product, onClose, onConfirm }: ProductMod
           <img src={product.image} alt={product.title} className="p-modal-product-img" />
           <div className="p-modal-product-info">
             <h4 className="p-modal-product-title">{product.title}</h4>
-            <span className="p-modal-product-price">R$ {product.price.toFixed(2)}</span>
+            <span className="p-modal-product-price">
+              {product.priceOnRequest ? 'Sob Consulta' : `R$ ${product.price.toFixed(2)}`}
+            </span>
           </div>
         </div>
 
@@ -200,7 +202,9 @@ export default function ProductModal({ product, onClose, onConfirm }: ProductMod
         <div className="p-modal-footer">
           <div className="p-modal-total">
             <span className="p-modal-total-lbl">Total</span>
-            <span className="p-modal-total-price">R$ {(product.price * quantity).toFixed(2)}</span>
+            <span className="p-modal-total-price">
+              {product.priceOnRequest ? 'Sob Consulta' : `R$ ${(product.price * quantity).toFixed(2)}`}
+            </span>
           </div>
           <button className="p-modal-btn-confirm" onClick={handleConfirm}>
             <ShieldCheck size={18} />

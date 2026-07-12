@@ -51,6 +51,7 @@ export default function CartPage() {
     });
 
     // Build WhatsApp message
+    const hasService = cart.some(item => item.product.priceOnRequest);
     let msg = `Olá! Quero confirmar meu pedido na *IR3H Store*! 💎\n\n`;
     msg += `*Protocolo:* ${order.orderId}\n`;
     msg += `*Cliente:* ${name}\n`;
@@ -60,13 +61,13 @@ export default function CartPage() {
     msg += `\n*━━━ PRODUTOS ━━━*\n`;
     cart.forEach((item, idx) => {
       msg += `\n${idx + 1}. *${item.product.title}* (x${item.quantity})\n`;
-      msg += `   ↳ Valor: R$ ${(item.product.price * item.quantity).toFixed(2)}\n`;
+      msg += `   ↳ Valor: ${item.product.priceOnRequest ? 'Sob Consulta' : `R$ ${(item.product.price * item.quantity).toFixed(2)}`}\n`;
       msg += `   ↳ Envio: ${item.deliveryType}\n`;
       msg += `   ↳ Nick: ${item.nick}\n`;
       if (item.loginInfo) msg += `   ↳ Login: ${item.loginInfo}\n`;
     });
-    msg += `\n*Total: R$ ${cartTotal.toFixed(2)}*\n\n`;
-    msg += `Aguardo as instruções de pagamento via *Pix* e liberação do pedido. Obrigado(a)! 🙏`;
+    msg += `\n*Total: R$ ${cartTotal.toFixed(2)}${hasService ? ' + Valor sob Consulta 💬' : ''}*\n\n`;
+    msg += `Aguardo as instruções de pagamento${!hasService ? ' via *Pix*' : ' e o orçamento dos serviços'} para liberação do pedido. Obrigado(a)! 🙏`;
 
     const encoded = encodeURIComponent(msg);
     const waLink = `https://api.whatsapp.com/send?phone=5527988003025&text=${encoded}`;
@@ -130,7 +131,11 @@ export default function CartPage() {
                   >+</button>
                 </div>
                 <span className="cart-item-price">
-                  R$ {(item.product.price * item.quantity).toFixed(2)}
+                  {item.product.priceOnRequest ? (
+                    <span style={{ fontSize: '11px', textTransform: 'uppercase', color: 'var(--brand-accent)' }}>Sob Consulta</span>
+                  ) : (
+                    `R$ ${(item.product.price * item.quantity).toFixed(2)}`
+                  )}
                 </span>
               </div>
             </div>
@@ -231,20 +236,27 @@ export default function CartPage() {
       </form>
 
       {/* Summary */}
-      <div className="cart-summary">
-        <div className="cart-summary-row">
-          <span>Subtotal</span>
-          <span>R$ {cartTotal.toFixed(2)}</span>
-        </div>
-        <div className="cart-summary-row">
-          <span>Entrega</span>
-          <span style={{ color: '#10b981', fontWeight: 700 }}>✓ Digital (Grátis)</span>
-        </div>
-        <div className="cart-summary-row total">
-          <span>Total</span>
-          <span className="cart-summary-total-price">R$ {cartTotal.toFixed(2)}</span>
-        </div>
-      </div>
+      {(() => {
+        const hasService = cart.some(item => item.product.priceOnRequest);
+        return (
+          <div className="cart-summary">
+            <div className="cart-summary-row">
+              <span>Subtotal</span>
+              <span>R$ {cartTotal.toFixed(2)}{hasService && ' + Sob Consulta'}</span>
+            </div>
+            <div className="cart-summary-row">
+              <span>Entrega</span>
+              <span style={{ color: '#10b981', fontWeight: 700 }}>✓ Digital (Grátis)</span>
+            </div>
+            <div className="cart-summary-row total">
+              <span>Total</span>
+              <span className="cart-summary-total-price">
+                R$ {cartTotal.toFixed(2)}{hasService && ' + Sob Consulta'}
+              </span>
+            </div>
+          </div>
+        );
+      })()}
 
       {/* Trust signals */}
       <div className="cart-trust">

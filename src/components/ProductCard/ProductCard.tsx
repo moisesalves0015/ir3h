@@ -131,12 +131,18 @@ export default function ProductCard({ product, variant = 'grid', onBuy }: Produc
 
         {/* Price row */}
         <div className="pcard__price-row">
-          <span className="pcard__price">R${product.price.toFixed(2)}</span>
-          {product.originalPrice && (
-            <span className="pcard__original">R${product.originalPrice.toFixed(2)}</span>
-          )}
-          {product.discount && (
-            <span className="pcard__discount-badge">-{product.discount}%</span>
+          {product.priceOnRequest ? (
+            <span className="pcard__price" style={{ color: 'var(--brand-accent)', fontSize: '12px', textTransform: 'uppercase', fontWeight: '900' }}>Sob Consulta</span>
+          ) : (
+            <>
+              <span className="pcard__price">R${product.price.toFixed(2)}</span>
+              {product.originalPrice && (
+                <span className="pcard__original">R${product.originalPrice.toFixed(2)}</span>
+              )}
+              {product.discount && (
+                <span className="pcard__discount-badge">-{product.discount}%</span>
+              )}
+            </>
           )}
         </div>
 
