@@ -54,7 +54,7 @@ export default function FlashSale({ onBuy }: FlashSaleProps) {
         </button>
       </div>
 
-      <div className="flash-products scroll-x" style={{ padding: '0 var(--space-3) var(--space-3)' }}>
+      <div className="flash-products scroll-x" style={{ padding: '0 var(--space-4) var(--space-3)' }}>
         {products.map(product => (
           <div key={product.id} className="flash-product-wrap">
             <ProductCard product={product} variant="flash" onBuy={onBuy} />

@@ -3,7 +3,7 @@
 // ============================================================
 
 export type ProductBadge = 'sale' | 'new' | 'hot' | 'exclusive';
-export type ProductCategory = 'credits' | 'vip' | 'ap' | 'rooms' | 'nude' | 'combos';
+export type ProductCategory = 'credits' | 'vip' | 'ap' | 'rooms' | 'nude' | 'combos' | 'service';
 export type DeliveryMode = 'gift' | 'transfer' | 'login' | 'gift_or_transfer';
 
 export interface ProductBenefit {
@@ -548,7 +548,7 @@ const roomDecoracao: Product = {
   rating: 4.9,
   reviews: 112,
   sold: '420',
-  category: 'rooms',
+  category: 'service',
   deliveryTime: '30 a 90 minutos',
   deliveryModes: ['login'],
   benefits: [
@@ -950,6 +950,13 @@ export const categoryMeta: Record<string, { label: string; description: string; 
     description: 'Pacotes combinados com desconto especial. A forma mais econômica de aproveitar o IMVU.',
     emoji: '🎁',
     color: '#111827',
+    image: '/images/cover_all.png',
+  },
+  service: {
+    label: 'Serviço',
+    description: 'Serviços especializados, decorações e personalizações para o seu avatar e conta IMVU.',
+    emoji: '🔧',
+    color: '#db2777',
     image: '/images/cover_all.png',
   },
 };

@@ -80,7 +80,7 @@ export default function App() {
       const seg = location.pathname.split('/')[2];
       const tabMap: Record<string, string> = {
         credits: 'Créditos', vip: 'VIP', ap: 'AP',
-        rooms: 'Rooms', nude: 'Nude', combos: 'Combos',
+        rooms: 'Rooms', nude: 'Nude', combos: 'Combos', service: 'Serviço',
       };
       return tabMap[seg] ?? navTabs[0];
     }
@@ -96,6 +96,7 @@ export default function App() {
       'Rooms': '/categoria/rooms',
       'Nude': '/categoria/nude',
       'Combos': '/categoria/combos',
+      'Serviço': '/categoria/service',
     };
     navigate(slugMap[tab] ?? '/');
   };
@@ -105,7 +106,7 @@ export default function App() {
       {/* Sticky header */}
       <TopBar cartCount={cartCount} />
       {!isSearch && <SearchBar />}
-      {isHome && (
+      {(isHome || location.pathname.startsWith('/categoria')) && (
         <NavTabs activeTab={activeNavTab} onChange={handleNavTabChange} />
       )}
 

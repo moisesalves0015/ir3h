@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import './CategoryPage.css';
 import { useState, useMemo } from 'react';
-import { ChevronLeft, SlidersHorizontal, ArrowUpDown, Grid3x3, List } from 'lucide-react';
+import { SlidersHorizontal, ArrowUpDown, Grid3x3, List } from 'lucide-react';
 import { getProductsByCategory, allProducts, categoryMeta } from '../../data/products';
 import type { ProductCategory } from '../../data/products';
 import ProductCard from '../../components/ProductCard/ProductCard';
@@ -53,36 +53,20 @@ export default function CategoryPage() {
 
   return (
     <div className="cat-page">
-      {/* Header */}
-      <div className="cat-page__header">
-        <button
-          className="cat-page__back"
-          onClick={() => navigate(-1)}
-          aria-label="Voltar"
-        >
-          <ChevronLeft size={20} />
-        </button>
-        <div className="cat-page__header-info">
-          {meta ? (
-            <>
-              <span className="cat-page__emoji">{meta.emoji}</span>
-              <h1 className="cat-page__title">{meta.label}</h1>
-            </>
-          ) : (
-            <h1 className="cat-page__title">Todas as Categorias</h1>
-          )}
-        </div>
-      </div>
-
-      {/* Hero image for specific category */}
-      {meta && (
-        <div className="cat-page__hero">
-          <img src={meta.image} alt={meta.label} className="cat-page__hero-img" />
-          <div className="cat-page__hero-overlay">
-            <p className="cat-page__description">{meta.description}</p>
+      {/* Unified Hero cover banner with overlay title and description */}
+      <div className="cat-page__hero">
+        <img src={meta ? meta.image : '/images/cover_all.png'} alt={meta ? meta.label : 'IR3H Store'} className="cat-page__hero-img" />
+        <div className="cat-page__hero-overlay">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            <h2 className="cat-page__hero-title" style={{ fontSize: 'var(--font-xl)', fontWeight: '900', color: '#ffffff' }}>
+              {meta ? `${meta.emoji} ${meta.label}` : '💎 Todas as Categorias'}
+            </h2>
+            <p className="cat-page__description">
+              {meta ? meta.description : 'Explore todos os pacotes de Créditos, Assinaturas VIP, Access Pass (AP), Salas, Combos e Serviços com entrega rápida.'}
+            </p>
           </div>
         </div>
-      )}
+      </div>
 
       {/* Category pills when viewing all */}
       {!id && (

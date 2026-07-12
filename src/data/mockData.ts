@@ -40,6 +40,7 @@ export const categories: Category[] = [
   { id: 'rooms',   label: 'Rooms',    emoji: '🏠', color: '#1e3a8a' },
   { id: 'nude',    label: 'Nude',     emoji: '🔞', color: '#85144b' },
   { id: 'combos',  label: 'Combos',   emoji: '🎁', color: '#111827' },
+  { id: 'service', label: 'Serviço',  emoji: '🔧', color: '#db2777' },
 ];
 
 // ─── Flash Sale Products (Ofertas Relâmpago) ───────────────────
@@ -237,4 +238,4 @@ export const heroBanners: Banner[] = [
 ];
 
 // ─── Navigation tabs ──────────────────────────────────────────
-export const navTabs = ['Início', 'Créditos', 'VIP', 'AP', 'Rooms', 'Nude', 'Combos'];
+export const navTabs = ['Início', 'Créditos', 'VIP', 'AP', 'Rooms', 'Nude', 'Combos', 'Serviço'];

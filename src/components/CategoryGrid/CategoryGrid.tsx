@@ -1,18 +1,18 @@
 import { useNavigate } from 'react-router-dom';
 import './CategoryGrid.css';
-import { ChevronRight, Gem, Crown, Unlock, Gift, Home, Flame } from 'lucide-react';
+import { ChevronRight, Gem, Crown, Unlock, Gift, Home, Flame, Wrench } from 'lucide-react';
 import { categories } from '../../data/mockData';
-import { getProductsByCategory } from '../../data/products';
-import type { ProductCategory } from '../../data/products';
 
 const getCategoryIcon = (id: string) => {
+  const iconColor = '#db2777'; // Pink color standardized for all icons
   switch (id) {
-    case 'credits': return <Gem size={20} style={{ color: '#fbbf24' }} />;
-    case 'vip':     return <Crown size={20} style={{ color: '#a78bfa' }} />;
-    case 'ap':      return <Unlock size={20} style={{ color: '#db2777' }} />;
-    case 'rooms':   return <Home size={20} style={{ color: '#60a5fa' }} />;
-    case 'nude':    return <Flame size={20} style={{ color: '#ec4899' }} />;
-    case 'combos':  return <Gift size={20} style={{ color: '#a78bfa' }} />;
+    case 'credits': return <Gem size={20} style={{ color: iconColor }} />;
+    case 'vip':     return <Crown size={20} style={{ color: iconColor }} />;
+    case 'ap':      return <Unlock size={20} style={{ color: iconColor }} />;
+    case 'rooms':   return <Home size={20} style={{ color: iconColor }} />;
+    case 'nude':    return <Flame size={20} style={{ color: iconColor }} />;
+    case 'combos':  return <Gift size={20} style={{ color: iconColor }} />;
+    case 'service': return <Wrench size={20} style={{ color: iconColor }} />;
     default:        return null;
   }
 };
@@ -30,17 +30,15 @@ export default function CategoryGrid() {
       </div>
       <div className="cat-grid">
         {categories.map(cat => {
-          const count = getProductsByCategory(cat.id as ProductCategory).length;
           return (
             <button
               key={cat.id}
               className="cat-item"
               onClick={() => navigate(`/categoria/${cat.id}`)}
-              aria-label={`Ver ${cat.label} — ${count} produtos`}
+              aria-label={`Ver ${cat.label}`}
             >
               <span className="cat-icon">{getCategoryIcon(cat.id)}</span>
               <span className="cat-label">{cat.label}</span>
-              <span className="cat-count">{count}</span>
             </button>
           );
         })}
