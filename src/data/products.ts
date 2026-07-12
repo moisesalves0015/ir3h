@@ -522,7 +522,7 @@ const roomBasica: Product = {
     'Informar seu Nick para entrega',
   ],
   tags: ['rooms', 'sala', 'imvu', 'chat', 'básica'],
-  relatedIds: [32, 21, 2],
+  relatedIds: [21, 2],
   featured: false,
   isFlashSale: false,
   isNewArrival: true,
@@ -531,49 +531,6 @@ const roomBasica: Product = {
   reviews_data: [
     { author: 'Mel_rooms', avatar: '🏠', rating: 5, text: 'Sala linda! Todos os meus amigos adoraram.', date: '4 dias atrás' },
     { author: 'Joao_IMVU', avatar: '⭐', rating: 4, text: 'Boa opção para começar a ter sua sala.', date: '2 semanas atrás' },
-  ],
-};
-
-const roomDecoracao: Product = {
-  id: 32,
-  slug: 'decoracao-completa-sala-imvu',
-  title: 'Decoração Completa para Sala IMVU',
-  shortDescription: 'Pacote de decoração premium para transformar sua sala no IMVU.',
-  longDescription:
-    'Transforme sua sala do IMVU com um pacote completo de decoração premium! Inclui móveis, iluminação, objetos decorativos e temática personalizada. Sua sala vai se tornar o ponto de encontro favorito dos seus amigos no IMVU. Aplicamos todos os itens diretamente na sua sala.',
-  price: 0,
-  priceOnRequest: true,
-  image: '/images/rooms.png',
-  badge: 'hot',
-  rating: 4.9,
-  reviews: 112,
-  sold: '420',
-  category: 'service',
-  deliveryTime: '30 a 90 minutos',
-  deliveryModes: ['login'],
-  benefits: [
-    { icon: '🛋️', text: 'Móveis premium incluídos no pacote' },
-    { icon: '💡', text: 'Iluminação e efeitos especiais' },
-    { icon: '🎨', text: 'Temática personalizada conforme seu gosto' },
-    { icon: '✨', text: 'Objetos decorativos exclusivos' },
-    { icon: '📸', text: 'Foto final da sala enviada para aprovação' },
-  ],
-  requirements: [
-    'Ter uma conta IMVU active com sala existente',
-    'Fornecer acesso temporário via Login para aplicação',
-    'Informar tema/estilo de preferência ao solicitar',
-  ],
-  tags: ['rooms', 'decoração', 'imvu', 'sala', 'premium'],
-  relatedIds: [31, 21, 13],
-  featured: true,
-  isFlashSale: false,
-  isNewArrival: false,
-  isRecommended: true,
-  stock: 40,
-  reviews_data: [
-    { author: 'Rafa_decor', avatar: '🛋️', rating: 5, text: 'Ficou INCRÍVEL! Melhor que esperava.', date: '3 dias atrás' },
-    { author: 'Bianca_room', avatar: '💜', rating: 5, text: 'Atendimento e resultado perfeitos. Sala dos sonhos!', date: '1 semana atrás' },
-    { author: 'Leo_IMVU', avatar: '✨', rating: 5, text: 'Todos os amigos amaram. Nota 10!', date: '3 semanas atrás' },
   ],
 };
 
@@ -606,7 +563,7 @@ const serviceCasamento: Product = {
     'Agendar data e horário com nossa equipe no WhatsApp'
   ],
   tags: ['serviço', 'casamento', 'imvu', 'romântico', 'festa'],
-  relatedIds: [32, 63],
+  relatedIds: [62, 63],
   reviews_data: [
     { author: 'Lara_e_Dan', avatar: '💍', rating: 5, text: 'Foi lindo demais! Perfeito nos mínimos detalhes.', date: '5 dias atrás' }
   ]
@@ -641,7 +598,7 @@ const serviceAniversario: Product = {
     'Alinhamento do tema preferido com nossa equipe'
   ],
   tags: ['serviço', 'aniversário', 'imvu', 'festa', 'balada'],
-  relatedIds: [64, 32],
+  relatedIds: [64, 61],
   reviews_data: [
     { author: 'Gaby_star', avatar: '🎉', rating: 5, text: 'Minha festa foi a melhor! Todo mundo curtiu muito.', date: '1 semana atrás' }
   ]
@@ -673,7 +630,7 @@ const serviceRomanticRoom: Product = {
     'Acesso temporário via Login para aplicação'
   ],
   tags: ['serviço', 'romântico', 'sala', 'poses', 'imvu'],
-  relatedIds: [61, 32],
+  relatedIds: [61, 64],
   reviews_data: [
     { author: 'Leo_love', avatar: '❤️', rating: 5, text: 'A sala ficou perfeita para passar o tempo com meu par.', date: '3 dias atrás' }
   ]
@@ -706,7 +663,7 @@ const serviceBalada: Product = {
     'Acesso temporário via Login para aplicação da estrutura'
   ],
   tags: ['serviço', 'balada', 'club', 'dj', 'festa', 'imvu'],
-  relatedIds: [62, 32],
+  relatedIds: [62, 61],
   reviews_data: [
     { author: 'DJ_Tigo', avatar: '🎧', rating: 5, text: 'Ficou idêntico a um club real. Nota 1000!', date: '6 dias atrás' }
   ]
@@ -738,7 +695,7 @@ const serviceVariado: Product = {
     'Orçamento calculado com base na complexidade'
   ],
   tags: ['serviço', 'encomenda', 'customizado', 'personalizado', 'imvu'],
-  relatedIds: [32, 66],
+  relatedIds: [66, 67],
   reviews_data: [
     { author: 'Carol_S', avatar: '⭐', rating: 5, text: 'Fizeram um lounge de praia incrível para mim. Muito atenciosos!', date: '2 semanas atrás' }
   ]
@@ -1086,7 +1043,6 @@ export const allProducts: Product[] = [
   vipDiamond,
   accessPass,
   roomBasica,
-  roomDecoracao,
   serviceCasamento,
   serviceAniversario,
   serviceRomanticRoom,
@@ -1196,6 +1152,6 @@ export const categoryMeta: Record<string, { label: string; description: string; 
     description: 'Serviços especializados, decorações e personalizações para o seu avatar e conta IMVU.',
     emoji: '🔧',
     color: '#db2777',
-    image: '/images/services_banner.jpg',
+    image: '/images/cover_all.png',
   },
 };
