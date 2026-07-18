@@ -1,5 +1,5 @@
 import './BottomNav.css';
-import { Home, Grid, ShoppingCart, Heart, User } from 'lucide-react';
+import { Home, Store, ShoppingCart, Heart, User } from 'lucide-react';
 
 interface BottomNavProps {
   active: string;
@@ -9,7 +9,7 @@ interface BottomNavProps {
 
 const tabs = [
   { id: 'home',     label: 'Início',     Icon: Home },
-  { id: 'category', label: 'Categorias', Icon: Grid },
+  { id: 'category', label: 'Loja',       Icon: Store },
   { id: 'cart',     label: 'Carrinho',   Icon: ShoppingCart },
   { id: 'wishlist', label: 'Favoritos',  Icon: Heart },
   { id: 'profile',  label: 'Minha Conta',Icon: User },

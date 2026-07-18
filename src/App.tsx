@@ -10,6 +10,7 @@ import BottomNav from './components/BottomNav/BottomNav';
 import Toast from './components/Toast/Toast';
 
 import HomePage from './pages/HomePage/HomePage';
+import LandingPage from './pages/LandingPage/LandingPage';
 import CategoryPage from './pages/CategoryPage/CategoryPage';
 import ProductPage from './pages/ProductPage/ProductPage';
 import SearchPage from './pages/SearchPage/SearchPage';
@@ -34,7 +35,8 @@ export default function App() {
   // Update document title on route change
   useEffect(() => {
     const pathTitles: Record<string, string> = {
-      '/': 'IR3H Store — Créditos IMVU, VIP & AP',
+      '/': 'IR3H Store — Promoções, Créditos & Passes IMVU',
+      '/ir3h-store': 'Loja Oficial — IR3H Store',
       '/busca': 'Buscar Produtos — IR3H Store',
       '/carrinho': 'Meu Carrinho — IR3H Store',
       '/favoritos': 'Meus Favoritos — IR3H Store',
@@ -49,11 +51,13 @@ export default function App() {
     document.title = title;
   }, [location.pathname]);
 
-  const isHome = location.pathname === '/';
+  const isLanding = location.pathname === '/';
+  const isStore = location.pathname === '/ir3h-store';
   const isSearch = location.pathname === '/busca';
-  const activeBottomTab = location.pathname === '/'
+
+  const activeBottomTab = isLanding
     ? 'home'
-    : location.pathname.startsWith('/categoria')
+    : location.pathname.startsWith('/categoria') || isStore
     ? 'category'
     : location.pathname === '/carrinho'
     ? 'cart'
@@ -66,7 +70,7 @@ export default function App() {
   const handleBottomNavChange = (tab: string) => {
     const map: Record<string, string> = {
       home: '/',
-      category: '/categoria',
+      category: '/ir3h-store', // "Categorias" or "Loja" goes to the store home now!
       cart: '/carrinho',
       wishlist: '/favoritos',
       profile: '/perfil',
@@ -89,7 +93,7 @@ export default function App() {
 
   const handleNavTabChange = (tab: string) => {
     const slugMap: Record<string, string> = {
-      'Início': '/',
+      'Início': '/ir3h-store',
       'Créditos': '/categoria/credits',
       'VIP': '/categoria/vip',
       'AP': '/categoria/ap',
@@ -98,22 +102,23 @@ export default function App() {
       'Combos': '/categoria/combos',
       'Serviço': '/categoria/service',
     };
-    navigate(slugMap[tab] ?? '/');
+    navigate(slugMap[tab] ?? '/ir3h-store');
   };
 
   return (
-    <div className="app-shell">
+    <div className={`app-shell ${isLanding ? 'app-shell--landing' : ''}`}>
       {/* Sticky header */}
-      <TopBar cartCount={cartCount} />
-      {!isSearch && <SearchBar />}
-      {(isHome || location.pathname.startsWith('/categoria')) && (
+      {!isLanding && <TopBar cartCount={cartCount} />}
+      {!isSearch && !isLanding && <SearchBar />}
+      {(isStore || location.pathname.startsWith('/categoria')) && (
         <NavTabs activeTab={activeNavTab} onChange={handleNavTabChange} />
       )}
 
       {/* Main content */}
       <main className="app-scroll" id="main-content">
         <Routes>
-          <Route path="/" element={<><PromoBar /><HomePage /></>} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/ir3h-store" element={<><PromoBar /><HomePage /></>} />
           <Route path="/categoria" element={<CategoryPage />} />
           <Route path="/categoria/:id" element={<CategoryPage />} />
           <Route path="/produto/:slug" element={<ProductPage />} />
@@ -128,7 +133,7 @@ export default function App() {
           <Route path="/privacidade" element={<PrivacyPage />} />
           <Route path="/termos" element={<TermsPage />} />
           {/* Fallback */}
-          <Route path="*" element={<HomePage />} />
+          <Route path="*" element={<LandingPage />} />
         </Routes>
         <div style={{ height: 'calc(var(--bottom-nav-h) + env(safe-area-inset-bottom, 0px) + 16px)' }} />
       </main>

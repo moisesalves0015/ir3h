@@ -90,8 +90,6 @@ html, body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-  max-width: 480px;
-  margin: 0 auto;
   position: relative;
 }
 

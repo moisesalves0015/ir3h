@@ -3,6 +3,14 @@
   flex-direction: column;
   min-height: 100dvh;
   position: relative;
+  max-width: 480px;
+  margin: 0 auto;
+  background: var(--color-bg);
+}
+
+.app-shell--landing {
+  max-width: 100% !important;
+  margin: 0 !important;
 }
 
 .app-scroll {
