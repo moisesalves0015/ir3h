@@ -1172,13 +1172,39 @@
   text-align: center;
 }
 
-.landing-promo__grid {
-  display: grid;
-  grid-template-columns: 1fr;
+.landing-promo__slider-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.landing-promo__slider {
+  display: flex;
   gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 16px; /* Para o scrollbar não cortar conteúdo */
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  
+  /* Esconder a barra de rolagem (opcional, se preferir limpo) */
+  scrollbar-width: thin;
+  scrollbar-color: var(--brand-primary) var(--color-surface);
+}
+
+.landing-promo__slider::-webkit-scrollbar {
+  height: 6px;
+}
+.landing-promo__slider::-webkit-scrollbar-track {
+  background: var(--color-surface);
+  border-radius: 4px;
+}
+.landing-promo__slider::-webkit-scrollbar-thumb {
+  background: var(--brand-primary);
+  border-radius: 4px;
 }
 
 .landing-promo-card {
+  flex: 0 0 calc(85% - 20px); /* 85% width on mobile */
+  scroll-snap-align: start;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
@@ -1278,16 +1304,29 @@
   box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
 }
 
+.landing-promo-card__btn--shop {
+  background: linear-gradient(135deg, var(--brand-primary), var(--brand-primary-dark));
+}
+.landing-promo-card__btn--shop:hover {
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+}
+
 @media (min-width: 768px) {
   .landing-promo {
     padding: 70px 40px;
   }
 
-  .landing-promo__grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+  .landing-promo__slider-container {
     max-width: 1200px;
     margin: 0 auto;
+  }
+
+  .landing-promo__slider {
+    gap: 30px;
+  }
+
+  .landing-promo-card {
+    flex: 0 0 calc(33.333% - 20px); /* 3 cards on desktop */
   }
 
   .landing-promo-card__banner {

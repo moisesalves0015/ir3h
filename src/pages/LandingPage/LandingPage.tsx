@@ -54,19 +54,19 @@ const PROMO_ROOMS = [
   },
 ];
 
-// Produtos de terceiros para divulgação
-const PROMO_PRODUCTS = [
+// Shops de terceiros para divulgação
+const PROMO_SHOPS = [
   {
     id: 1,
-    name: 'Coleção de Outono',
-    description: 'Looks exclusivos de avatar disponíveis no catálogo IMVU.',
-    emoji: '👗',
+    name: 'Loja de Outono',
+    description: 'Looks exclusivos de avatar disponíveis no catálogo da loja.',
+    emoji: '🛍️',
     gradient: 'linear-gradient(135deg, #9d174d 0%, #db2777 100%)',
     link: 'https://imvu.com',
   },
   {
     id: 2,
-    name: 'Pack Acessórios VIP',
+    name: 'Acessórios VIP Shop',
     description: 'Conjunto de acessórios premium para customizar seu avatar.',
     emoji: '💍',
     gradient: 'linear-gradient(135deg, #78350f 0%, #d97706 100%)',
@@ -74,7 +74,7 @@ const PROMO_PRODUCTS = [
   },
   {
     id: 3,
-    name: 'Bundle Masculino',
+    name: 'Shop Masculino',
     description: 'Seleção curada de roupas e poses para avatares masculinos.',
     emoji: '👔',
     gradient: 'linear-gradient(135deg, #1e3a8a 0%, #6366f1 100%)',
@@ -412,59 +412,63 @@ export default function LandingPage() {
           <h2 className="landing-promo__title">🏠 Rooms em Destaque</h2>
           <p className="landing-promo__subtitle">Salas públicas para você visitar no IMVU — clique e entre!</p>
         </div>
-        <div className="landing-promo__grid">
-          {PROMO_ROOMS.map((room) => (
-            <div key={room.id} className="landing-promo-card">
-              <div className="landing-promo-card__banner" style={{ background: room.gradient }}>
-                <span className="landing-promo-card__emoji">{room.emoji}</span>
-                <span className="landing-promo-card__badge">🏠 Room Pública</span>
+        <div className="landing-promo__slider-container">
+          <div className="landing-promo__slider">
+            {PROMO_ROOMS.map((room) => (
+              <div key={room.id} className="landing-promo-card">
+                <div className="landing-promo-card__banner" style={{ background: room.gradient }}>
+                  <span className="landing-promo-card__emoji">{room.emoji}</span>
+                  <span className="landing-promo-card__badge">🏠 Room Pública</span>
+                </div>
+                <div className="landing-promo-card__body">
+                  <h3 className="landing-promo-card__name">{room.name}</h3>
+                  <p className="landing-promo-card__desc">{room.description}</p>
+                  <a
+                    href={room.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="landing-promo-card__btn"
+                  >
+                    <ExternalLink size={13} />
+                    Visitar Sala
+                  </a>
+                </div>
               </div>
-              <div className="landing-promo-card__body">
-                <h3 className="landing-promo-card__name">{room.name}</h3>
-                <p className="landing-promo-card__desc">{room.description}</p>
-                <a
-                  href={room.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="landing-promo-card__btn"
-                >
-                  <ExternalLink size={13} />
-                  Visitar Sala
-                </a>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ── DIVULGAÇÃO: PRODUTOS ── */}
-      <section className="landing-promo landing-promo--alt" id="produtos">
+      {/* ── DIVULGAÇÃO: SHOPS ── */}
+      <section className="landing-promo landing-promo--alt" id="shops">
         <div className="landing-promo__header">
-          <h2 className="landing-promo__title">🛍️ Produtos em Destaque</h2>
-          <p className="landing-promo__subtitle">Looks e itens exclusivos no catálogo IMVU — confira!</p>
+          <h2 className="landing-promo__title">🛍️ Shops em Destaque</h2>
+          <p className="landing-promo__subtitle">Conheça as melhores lojas e catálogos do IMVU — confira!</p>
         </div>
-        <div className="landing-promo__grid">
-          {PROMO_PRODUCTS.map((product) => (
-            <div key={product.id} className="landing-promo-card">
-              <div className="landing-promo-card__banner" style={{ background: product.gradient }}>
-                <span className="landing-promo-card__emoji">{product.emoji}</span>
-                <span className="landing-promo-card__badge">🛍️ Produto</span>
+        <div className="landing-promo__slider-container">
+          <div className="landing-promo__slider">
+            {PROMO_SHOPS.map((shop) => (
+              <div key={shop.id} className="landing-promo-card">
+                <div className="landing-promo-card__banner" style={{ background: shop.gradient }}>
+                  <span className="landing-promo-card__emoji">{shop.emoji}</span>
+                  <span className="landing-promo-card__badge">🛍️ Shop</span>
+                </div>
+                <div className="landing-promo-card__body">
+                  <h3 className="landing-promo-card__name">{shop.name}</h3>
+                  <p className="landing-promo-card__desc">{shop.description}</p>
+                  <a
+                    href={shop.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="landing-promo-card__btn landing-promo-card__btn--shop"
+                  >
+                    <ExternalLink size={13} />
+                    Visitar Shop
+                  </a>
+                </div>
               </div>
-              <div className="landing-promo-card__body">
-                <h3 className="landing-promo-card__name">{product.name}</h3>
-                <p className="landing-promo-card__desc">{product.description}</p>
-                <a
-                  href={product.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="landing-promo-card__btn landing-promo-card__btn--product"
-                >
-                  <ExternalLink size={13} />
-                  Ver Produto
-                </a>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
