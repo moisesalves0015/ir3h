@@ -1139,3 +1139,296 @@
   }
 }
 
+/* ============================================================
+   SHOWCASE / DIVULGAÇÃO SECTION
+   ============================================================ */
+
+.landing-showcase {
+  padding: 32px 16px;
+  background: var(--color-bg);
+}
+
+.landing-showcase__title {
+  font-size: var(--font-2xl);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.landing-showcase__subtitle {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.landing-showcase__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.landing-showcase-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.landing-showcase-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.landing-showcase-card__banner {
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.landing-showcase-card__emoji {
+  font-size: 56px;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
+}
+
+.landing-showcase-card__type-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(4px);
+}
+
+.landing-showcase-card__body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.landing-showcase-card__name {
+  font-size: var(--font-base);
+  font-weight: 700;
+  color: #fff;
+}
+
+.landing-showcase-card__desc {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.landing-showcase-card__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  background: linear-gradient(135deg, var(--brand-primary), var(--brand-primary-dark));
+  color: #fff;
+  font-size: var(--font-xs);
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  width: fit-content;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.landing-showcase-card__btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+}
+
+@media (min-width: 768px) {
+  .landing-showcase {
+    padding: 60px 40px;
+  }
+
+  .landing-showcase__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .landing-showcase-card__banner {
+    height: 160px;
+  }
+}
+
+/* ============================================================
+   RÁDIO AO VIVO SECTION
+   ============================================================ */
+
+.landing-radio {
+  padding: 32px 16px;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.landing-radio__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.landing-radio__title {
+  font-size: var(--font-2xl);
+  font-weight: 800;
+  color: #fff;
+}
+
+.landing-radio__subtitle {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.landing-radio__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.landing-radio-card {
+  background: rgba(15, 10, 25, 0.6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.landing-radio-card--playing {
+  border-color: var(--brand-accent);
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.15);
+}
+
+.landing-radio-card__info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.landing-radio-card__emoji {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.landing-radio-card__name {
+  font-size: var(--font-sm);
+  font-weight: 700;
+  color: #fff;
+}
+
+.landing-radio-card__genre {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+/* Animated sound wave */
+.landing-radio-card__wave {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 20px;
+  margin-left: 4px;
+  flex-shrink: 0;
+}
+
+.landing-radio-card__wave span {
+  display: block;
+  width: 3px;
+  background: var(--brand-accent);
+  border-radius: 2px;
+  animation: soundWave 1s ease-in-out infinite alternate;
+}
+
+.landing-radio-card__wave span:nth-child(1) { height: 8px;  animation-delay: 0s; }
+.landing-radio-card__wave span:nth-child(2) { height: 16px; animation-delay: 0.15s; }
+.landing-radio-card__wave span:nth-child(3) { height: 12px; animation-delay: 0.3s; }
+.landing-radio-card__wave span:nth-child(4) { height: 20px; animation-delay: 0.45s; }
+
+@keyframes soundWave {
+  0%   { transform: scaleY(0.4); opacity: 0.7; }
+  100% { transform: scaleY(1);   opacity: 1; }
+}
+
+.landing-radio-card__actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.landing-radio-card__play {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, var(--brand-primary), var(--brand-primary-dark));
+  color: #fff;
+  font-size: var(--font-xs);
+  font-weight: 700;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.landing-radio-card__play--active {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
+}
+
+.landing-radio-card__play:hover {
+  transform: translateY(-1px);
+}
+
+.landing-radio-card__copy {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--color-border);
+  color: var(--text-secondary);
+  font-size: var(--font-xs);
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  transition: background var(--transition), color var(--transition);
+}
+
+.landing-radio-card__copy:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+@media (min-width: 768px) {
+  .landing-radio {
+    padding: 60px 40px;
+  }
+
+  .landing-radio__list {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+}
+
+

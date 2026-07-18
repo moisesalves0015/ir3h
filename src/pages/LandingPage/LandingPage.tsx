@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Zap,
@@ -8,7 +8,13 @@ import {
   ChevronDown,
   ChevronUp,
   CheckCircle,
-  Gem
+  Gem,
+  Play,
+  Square,
+  Copy,
+  Check,
+  ExternalLink,
+  Radio
 } from 'lucide-react';
 import './LandingPage.css';
 
@@ -20,10 +26,58 @@ const CREDIT_PACKS = [
   { value: '100.000', label: '100k Créditos', price: 'R$ 179,90', originalPrice: 'R$ 220,00', savings: 'Economize 18%', slug: '100k-creditos-imvu' },
 ];
 
+// Showcase items - rooms, products and external links
+const SHOWCASE_ITEMS = [
+  {
+    id: 1,
+    type: 'room',
+    title: 'Sala VIP Exclusiva',
+    description: 'Room temática premium com decoração especial para você e seus amigos.',
+    emoji: '🏠',
+    gradient: 'linear-gradient(135deg, #312e81 0%, #5b21b6 100%)',
+    link: 'https://imvu.com',
+    btnLabel: 'Ver Room',
+  },
+  {
+    id: 2,
+    type: 'product',
+    title: 'Coleção de Outono',
+    description: 'Looks exclusivos de avatar disponíveis agora no catálogo IMVU.',
+    emoji: '👗',
+    gradient: 'linear-gradient(135deg, #9d174d 0%, #db2777 100%)',
+    link: 'https://imvu.com',
+    btnLabel: 'Ver Produtos',
+  },
+  {
+    id: 3,
+    type: 'room',
+    title: 'Ambiente Noturno',
+    description: 'Sala night club com luzes neon e música ambiente para suas festas.',
+    emoji: '🌙',
+    gradient: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)',
+    link: 'https://imvu.com',
+    btnLabel: 'Entrar na Sala',
+  },
+];
+
+// Radio stations with live streaming links
+const RADIO_STATIONS = [
+  {
+    id: 1,
+    name: 'IR3H Radio',
+    genre: 'Pop / Eletrônico',
+    streamUrl: 'https://s4.radio.co/seec67ef36/listen',
+    emoji: '📻',
+  },
+];
+
 export default function LandingPage() {
   const navigate = useNavigate();
   const [selectedPackIndex, setSelectedPackIndex] = useState(0);
   const [faqOpenIndex, setFaqOpenIndex] = useState<number | null>(null);
+  const [playingRadioId, setPlayingRadioId] = useState<number | null>(null);
+  const [copiedRadioId, setCopiedRadioId] = useState<number | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const toggleFaq = (index: number) => {
     setFaqOpenIndex(faqOpenIndex === index ? null : index);
@@ -32,6 +86,39 @@ export default function LandingPage() {
   const handleBuyCredit = () => {
     const pack = CREDIT_PACKS[selectedPackIndex];
     navigate(`/produto/${pack.slug}`);
+  };
+
+  const handlePlayRadio = (station: typeof RADIO_STATIONS[0]) => {
+    if (playingRadioId === station.id) {
+      // Stop
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.src = '';
+        audioRef.current = null;
+      }
+      setPlayingRadioId(null);
+    } else {
+      // Stop any currently playing
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.src = '';
+      }
+      // Play new
+      const audio = new Audio(station.streamUrl);
+      audio.play().catch(() => {
+        // If browser blocks, open in new tab as fallback
+        window.open(station.streamUrl, '_blank', 'noopener');
+      });
+      audioRef.current = audio;
+      setPlayingRadioId(station.id);
+    }
+  };
+
+  const handleCopyLink = (url: string, id: number) => {
+    navigator.clipboard.writeText(url).then(() => {
+      setCopiedRadioId(id);
+      setTimeout(() => setCopiedRadioId(null), 2000);
+    });
   };
 
   const FAQS = [
@@ -354,6 +441,90 @@ export default function LandingPage() {
               "Sempre compro créditos aqui. Rápido, seguro e mais barato do que comprar direto no jogo."
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* Showcase / Divulgação Section */}
+      <section className="landing-showcase">
+        <h2 className="landing-showcase__title">🌟 Destaques & Divulgação</h2>
+        <p className="landing-showcase__subtitle">Rooms, produtos e espaços em destaque no universo IMVU:</p>
+        <div className="landing-showcase__grid">
+          {SHOWCASE_ITEMS.map((item) => (
+            <div key={item.id} className="landing-showcase-card">
+              <div
+                className="landing-showcase-card__banner"
+                style={{ background: item.gradient }}
+              >
+                <span className="landing-showcase-card__emoji">{item.emoji}</span>
+                <span className="landing-showcase-card__type-badge">
+                  {item.type === 'room' ? '🏠 Room' : '🛍️ Produto'}
+                </span>
+              </div>
+              <div className="landing-showcase-card__body">
+                <h3 className="landing-showcase-card__name">{item.title}</h3>
+                <p className="landing-showcase-card__desc">{item.description}</p>
+                <a
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="landing-showcase-card__btn"
+                >
+                  <ExternalLink size={14} />
+                  {item.btnLabel}
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Radio Section */}
+      <section className="landing-radio">
+        <div className="landing-radio__header">
+          <Radio size={22} style={{ color: 'var(--brand-accent)' }} />
+          <h2 className="landing-radio__title">Rádio ao Vivo</h2>
+        </div>
+        <p className="landing-radio__subtitle">Ouça nossas estações em tempo real — direto do navegador!</p>
+
+        <div className="landing-radio__list">
+          {RADIO_STATIONS.map((station) => {
+            const isPlaying = playingRadioId === station.id;
+            const isCopied = copiedRadioId === station.id;
+            return (
+              <div key={station.id} className={`landing-radio-card ${isPlaying ? 'landing-radio-card--playing' : ''}`}>
+                <div className="landing-radio-card__info">
+                  <span className="landing-radio-card__emoji">{station.emoji}</span>
+                  <div>
+                    <p className="landing-radio-card__name">{station.name}</p>
+                    <p className="landing-radio-card__genre">{station.genre}</p>
+                  </div>
+                  {isPlaying && (
+                    <div className="landing-radio-card__wave">
+                      <span></span><span></span><span></span><span></span>
+                    </div>
+                  )}
+                </div>
+                <div className="landing-radio-card__actions">
+                  <button
+                    className={`landing-radio-card__play ${isPlaying ? 'landing-radio-card__play--active' : ''}`}
+                    onClick={() => handlePlayRadio(station)}
+                    aria-label={isPlaying ? `Parar ${station.name}` : `Tocar ${station.name}`}
+                  >
+                    {isPlaying ? <Square size={16} /> : <Play size={16} />}
+                    {isPlaying ? 'Parar' : 'Ouvir'}
+                  </button>
+                  <button
+                    className="landing-radio-card__copy"
+                    onClick={() => handleCopyLink(station.streamUrl, station.id)}
+                    aria-label="Copiar link da rádio"
+                  >
+                    {isCopied ? <Check size={15} /> : <Copy size={15} />}
+                    {isCopied ? 'Copiado!' : 'Copiar Link'}
+                  </button>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </section>
 
