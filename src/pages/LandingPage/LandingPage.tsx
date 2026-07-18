@@ -479,45 +479,47 @@ export default function LandingPage() {
           <h2 className="landing-radio__title">Rádio ao Vivo</h2>
         </div>
         <p className="landing-radio__subtitle">Estações em transmissão em tempo real — ouça direto aqui!</p>
-        <div className="landing-radio__list">
-          {RADIO_STATIONS.map((station) => {
-            const isPlaying = playingRadioId === station.id;
-            const isCopied = copiedRadioId === station.id;
-            return (
-              <div key={station.id} className={`landing-radio-card ${isPlaying ? 'landing-radio-card--playing' : ''}`}>
-                <div className="landing-radio-card__info">
-                  <span className="landing-radio-card__emoji">{station.emoji}</span>
-                  <div className="landing-radio-card__text">
-                    <p className="landing-radio-card__name">{station.name}</p>
-                    <p className="landing-radio-card__genre">{station.genre}</p>
-                  </div>
-                  {isPlaying && (
-                    <div className="landing-radio-card__wave">
-                      <span></span><span></span><span></span><span></span>
+        <div className="landing-radio__slider-container">
+          <div className="landing-radio__slider">
+            {RADIO_STATIONS.map((station) => {
+              const isPlaying = playingRadioId === station.id;
+              const isCopied = copiedRadioId === station.id;
+              return (
+                <div key={station.id} className={`landing-radio-card ${isPlaying ? 'landing-radio-card--playing' : ''}`}>
+                  <div className="landing-radio-card__info">
+                    <span className="landing-radio-card__emoji">{station.emoji}</span>
+                    <div className="landing-radio-card__text">
+                      <p className="landing-radio-card__name">{station.name}</p>
+                      <p className="landing-radio-card__genre">{station.genre}</p>
                     </div>
-                  )}
+                    {isPlaying && (
+                      <div className="landing-radio-card__wave">
+                        <span></span><span></span><span></span><span></span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="landing-radio-card__actions">
+                    <button
+                      className={`landing-radio-card__play ${isPlaying ? 'landing-radio-card__play--active' : ''}`}
+                      onClick={() => handlePlayRadio(station)}
+                      aria-label={isPlaying ? `Parar ${station.name}` : `Tocar ${station.name}`}
+                    >
+                      {isPlaying ? <Square size={16} /> : <Play size={16} />}
+                      {isPlaying ? 'Parar' : 'Ouvir'}
+                    </button>
+                    <button
+                      className="landing-radio-card__copy"
+                      onClick={() => handleCopyLink(station.streamUrl, station.id)}
+                      aria-label="Copiar link da rádio"
+                    >
+                      {isCopied ? <Check size={15} /> : <Copy size={15} />}
+                      {isCopied ? 'Copiado!' : 'Copiar Link'}
+                    </button>
+                  </div>
                 </div>
-                <div className="landing-radio-card__actions">
-                  <button
-                    className={`landing-radio-card__play ${isPlaying ? 'landing-radio-card__play--active' : ''}`}
-                    onClick={() => handlePlayRadio(station)}
-                    aria-label={isPlaying ? `Parar ${station.name}` : `Tocar ${station.name}`}
-                  >
-                    {isPlaying ? <Square size={16} /> : <Play size={16} />}
-                    {isPlaying ? 'Parar' : 'Ouvir'}
-                  </button>
-                  <button
-                    className="landing-radio-card__copy"
-                    onClick={() => handleCopyLink(station.streamUrl, station.id)}
-                    aria-label="Copiar link da rádio"
-                  >
-                    {isCopied ? <Check size={15} /> : <Copy size={15} />}
-                    {isCopied ? 'Copiado!' : 'Copiar Link'}
-                  </button>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </section>
 

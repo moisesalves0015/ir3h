@@ -1364,13 +1364,38 @@
   margin-bottom: 32px;
 }
 
-.landing-radio__list {
+.landing-radio__slider-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.landing-radio__slider {
   display: flex;
-  flex-direction: column;
   gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 16px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  
+  scrollbar-width: thin;
+  scrollbar-color: var(--brand-primary) var(--color-surface);
+}
+
+.landing-radio__slider::-webkit-scrollbar {
+  height: 6px;
+}
+.landing-radio__slider::-webkit-scrollbar-track {
+  background: var(--color-surface);
+  border-radius: 4px;
+}
+.landing-radio__slider::-webkit-scrollbar-thumb {
+  background: var(--brand-primary);
+  border-radius: 4px;
 }
 
 .landing-radio-card {
+  flex: 0 0 calc(90% - 16px);
+  scroll-snap-align: start;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
@@ -1499,9 +1524,17 @@
     padding: 70px 40px;
   }
 
-  .landing-radio__list {
-    max-width: 800px;
+  .landing-radio__slider-container {
+    max-width: 1000px;
     margin: 0 auto;
+  }
+  
+  .landing-radio__slider {
+    gap: 20px;
+  }
+  
+  .landing-radio-card {
+    flex: 0 0 calc(50% - 20px);
   }
 }
 
