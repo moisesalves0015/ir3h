@@ -1203,62 +1203,67 @@
 }
 
 .landing-promo-card {
-  flex: 0 0 calc(85% - 20px); /* 85% width on mobile */
+  flex: 0 0 calc(80% - 20px);
   scroll-snap-align: start;
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1px solid rgba(255, 255, 255, 0.05); /* Mais suave */
   border-radius: var(--radius-lg);
   overflow: hidden;
+  box-shadow: var(--shadow-card); /* Usando a variável global de shadow */
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
 .landing-promo--alt .landing-promo-card {
-  background: rgba(15, 10, 25, 0.4);
+  background: rgba(15, 10, 25, 0.6);
+  border-color: rgba(255, 255, 255, 0.02);
 }
 
 .landing-promo-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
 }
 
 .landing-promo-card__banner {
-  height: 140px;
+  aspect-ratio: 16/9; /* Proporção moderna para banners */
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  overflow: hidden;
 }
 
 .landing-promo-card__emoji {
-  font-size: 64px;
-  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
-  transition: transform 0.3s ease;
+  font-size: 72px;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animação mais elástica */
 }
 
 .landing-promo-card:hover .landing-promo-card__emoji {
-  transform: scale(1.1);
+  transform: scale(1.15) rotate(5deg);
 }
 
 .landing-promo-card__badge {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  background: rgba(0, 0, 0, 0.55);
+  top: 10px;
+  left: 10px; /* Mudado para esquerda para se assemelhar ao pcard */
+  background: rgba(0, 0, 0, 0.6);
   color: #fff;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
-  padding: 4px 10px;
-  border-radius: var(--radius-full);
-  backdrop-filter: blur(4px);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm); /* Mais quadrado */
+  backdrop-filter: blur(8px);
   letter-spacing: 0.5px;
   text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .landing-promo-card__body {
-  padding: 20px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
 }
 
 .landing-promo-card__name {
@@ -1394,42 +1399,56 @@
 }
 
 .landing-radio-card {
-  flex: 0 0 calc(90% - 16px);
+  flex: 0 0 calc(60% - 16px); /* Cartão mais quadrado no mobile */
   scroll-snap-align: start;
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: var(--radius-md);
-  padding: 16px 20px;
+  padding: 20px 16px;
   display: flex;
+  flex-direction: column; /* Organização vertical para ser "quadrado" */
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  transition: border-color var(--transition), box-shadow var(--transition);
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.landing-radio-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
 }
 
 .landing-radio-card--playing {
   border-color: var(--brand-accent);
-  box-shadow: 0 0 20px rgba(251, 191, 36, 0.15);
-  background: rgba(251, 191, 36, 0.05);
+  box-shadow: 0 0 24px rgba(251, 191, 36, 0.2);
+  background: rgba(251, 191, 36, 0.03);
 }
 
 .landing-radio-card__info {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 16px;
-  flex: 1;
-  min-width: 0;
+  gap: 12px;
+  width: 100%;
 }
 
 .landing-radio-card__emoji {
-  font-size: 32px;
-  flex-shrink: 0;
+  font-size: 48px;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
+  transition: transform var(--transition);
+}
+
+.landing-radio-card:hover .landing-radio-card__emoji {
+  transform: scale(1.1);
 }
 
 .landing-radio-card__text {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
+  align-items: center;
 }
 
 .landing-radio-card__name {
@@ -1449,10 +1468,11 @@
 .landing-radio-card__wave {
   display: flex;
   align-items: flex-end;
-  gap: 3px;
+  justify-content: center;
+  gap: 4px;
   height: 24px;
-  margin-left: 8px;
-  flex-shrink: 0;
+  margin-top: 8px;
+  width: 100%;
 }
 
 .landing-radio-card__wave span {
@@ -1475,20 +1495,26 @@
 
 .landing-radio-card__actions {
   display: flex;
-  gap: 10px;
-  flex-shrink: 0;
+  flex-direction: column; /* Botões um em cima do outro ou lado a lado se preferir. Vamos colocar lado a lado */
+  flex-direction: row;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: auto;
 }
 
 .landing-radio-card__play {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  flex: 1;
+  gap: 6px;
   background: linear-gradient(135deg, var(--brand-primary), var(--brand-primary-dark));
   color: #fff;
   font-size: var(--font-xs);
   font-weight: 700;
-  padding: 10px 16px;
-  border-radius: var(--radius-md);
+  padding: 10px 0;
+  border-radius: var(--radius-sm);
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
@@ -1498,25 +1524,28 @@
 }
 
 .landing-radio-card__play:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 .landing-radio-card__copy {
   display: flex;
   align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid var(--color-border);
+  justify-content: center;
+  flex: 1;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   color: #fff;
   font-size: var(--font-xs);
   font-weight: 600;
-  padding: 10px 16px;
-  border-radius: var(--radius-md);
-  transition: background var(--transition), color var(--transition);
+  padding: 10px 0;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
 }
 
 .landing-radio-card__copy:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 @media (min-width: 768px) {
@@ -1534,7 +1563,7 @@
   }
   
   .landing-radio-card {
-    flex: 0 0 calc(50% - 20px);
+    flex: 0 0 calc(25% - 15px); /* 4 por linha no desktop, para ficarem "quadrados" */
   }
 }
 
