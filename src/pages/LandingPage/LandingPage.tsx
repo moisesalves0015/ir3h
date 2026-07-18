@@ -32,24 +32,21 @@ const PROMO_ROOMS = [
     id: 1,
     name: 'Sala VIP Exclusiva',
     description: 'Room temática premium com decoração especial. Venha conhecer!',
-    emoji: '🏠',
-    gradient: 'linear-gradient(135deg, #312e81 0%, #5b21b6 100%)',
+    imgUrl: 'https://i.pinimg.com/1200x/77/6f/11/776f11f2708aa43d734ab6b29c61dc98.jpg',
     link: 'https://imvu.com',
   },
   {
     id: 2,
     name: 'Ambiente Noturno',
     description: 'Sala night club com luzes neon e música ambiente para suas festas.',
-    emoji: '🌙',
-    gradient: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)',
+    imgUrl: 'https://i.pinimg.com/736x/52/6d/8f/526d8f3c93b6f76dddb903e4b057487b.jpg',
     link: 'https://imvu.com',
   },
   {
     id: 3,
     name: 'Lounge Tropical',
     description: 'Ambiente relaxante com decoração tropical. Perfeito para socializar.',
-    emoji: '🌴',
-    gradient: 'linear-gradient(135deg, #065f46 0%, #10b981 100%)',
+    imgUrl: 'https://i.pinimg.com/736x/14/43/35/1443351d08deaef582490c6a918c510f.jpg',
     link: 'https://imvu.com',
   },
 ];
@@ -60,24 +57,21 @@ const PROMO_SHOPS = [
     id: 1,
     name: 'Loja de Outono',
     description: 'Looks exclusivos de avatar disponíveis no catálogo da loja.',
-    emoji: '🛍️',
-    gradient: 'linear-gradient(135deg, #9d174d 0%, #db2777 100%)',
+    imgUrl: 'https://i.pinimg.com/736x/56/dc/b7/56dcb7d8e766ed9bc23b85a11f762fb9.jpg',
     link: 'https://imvu.com',
   },
   {
     id: 2,
     name: 'Acessórios VIP Shop',
     description: 'Conjunto de acessórios premium para customizar seu avatar.',
-    emoji: '💍',
-    gradient: 'linear-gradient(135deg, #78350f 0%, #d97706 100%)',
+    imgUrl: 'https://i.pinimg.com/736x/f7/a6/b0/f7a6b0403cf16bc5be6bf9d4b349591a.jpg',
     link: 'https://imvu.com',
   },
   {
     id: 3,
     name: 'Shop Masculino',
     description: 'Seleção curada de roupas e poses para avatares masculinos.',
-    emoji: '👔',
-    gradient: 'linear-gradient(135deg, #1e3a8a 0%, #6366f1 100%)',
+    imgUrl: 'https://i.pinimg.com/736x/2d/61/ac/2d61acb4aa6ed07ed03864d3f57b701e.jpg',
     link: 'https://imvu.com',
   },
 ];
@@ -416,8 +410,8 @@ export default function LandingPage() {
           <div className="landing-promo__slider">
             {PROMO_ROOMS.map((room) => (
               <div key={room.id} className="landing-promo-card">
-                <div className="landing-promo-card__banner" style={{ background: room.gradient }}>
-                  <span className="landing-promo-card__emoji">{room.emoji}</span>
+                <div className="landing-promo-card__banner">
+                  <img src={room.imgUrl} alt={room.name} className="landing-promo-card__bg-img" />
                   <span className="landing-promo-card__badge">🏠 Room Pública</span>
                 </div>
                 <div className="landing-promo-card__body">
@@ -449,8 +443,8 @@ export default function LandingPage() {
           <div className="landing-promo__slider">
             {PROMO_SHOPS.map((shop) => (
               <div key={shop.id} className="landing-promo-card">
-                <div className="landing-promo-card__banner" style={{ background: shop.gradient }}>
-                  <span className="landing-promo-card__emoji">{shop.emoji}</span>
+                <div className="landing-promo-card__banner">
+                  <img src={shop.imgUrl} alt={shop.name} className="landing-promo-card__bg-img" />
                   <span className="landing-promo-card__badge">🛍️ Shop</span>
                 </div>
                 <div className="landing-promo-card__body">
