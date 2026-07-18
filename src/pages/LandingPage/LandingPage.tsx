@@ -26,41 +26,63 @@ const CREDIT_PACKS = [
   { value: '100.000', label: '100k Créditos', price: 'R$ 179,90', originalPrice: 'R$ 220,00', savings: 'Economize 18%', slug: '100k-creditos-imvu' },
 ];
 
-// Showcase items - rooms, products and external links
-const SHOWCASE_ITEMS = [
+// Rooms públicas para divulgação (visitação)
+const PROMO_ROOMS = [
   {
     id: 1,
-    type: 'room',
-    title: 'Sala VIP Exclusiva',
-    description: 'Room temática premium com decoração especial para você e seus amigos.',
+    name: 'Sala VIP Exclusiva',
+    description: 'Room temática premium com decoração especial. Venha conhecer!',
     emoji: '🏠',
     gradient: 'linear-gradient(135deg, #312e81 0%, #5b21b6 100%)',
     link: 'https://imvu.com',
-    btnLabel: 'Ver Room',
   },
   {
     id: 2,
-    type: 'product',
-    title: 'Coleção de Outono',
-    description: 'Looks exclusivos de avatar disponíveis agora no catálogo IMVU.',
-    emoji: '👗',
-    gradient: 'linear-gradient(135deg, #9d174d 0%, #db2777 100%)',
-    link: 'https://imvu.com',
-    btnLabel: 'Ver Produtos',
-  },
-  {
-    id: 3,
-    type: 'room',
-    title: 'Ambiente Noturno',
+    name: 'Ambiente Noturno',
     description: 'Sala night club com luzes neon e música ambiente para suas festas.',
     emoji: '🌙',
     gradient: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)',
     link: 'https://imvu.com',
-    btnLabel: 'Entrar na Sala',
+  },
+  {
+    id: 3,
+    name: 'Lounge Tropical',
+    description: 'Ambiente relaxante com decoração tropical. Perfeito para socializar.',
+    emoji: '🌴',
+    gradient: 'linear-gradient(135deg, #065f46 0%, #10b981 100%)',
+    link: 'https://imvu.com',
   },
 ];
 
-// Radio stations with live streaming links
+// Produtos de terceiros para divulgação
+const PROMO_PRODUCTS = [
+  {
+    id: 1,
+    name: 'Coleção de Outono',
+    description: 'Looks exclusivos de avatar disponíveis no catálogo IMVU.',
+    emoji: '👗',
+    gradient: 'linear-gradient(135deg, #9d174d 0%, #db2777 100%)',
+    link: 'https://imvu.com',
+  },
+  {
+    id: 2,
+    name: 'Pack Acessórios VIP',
+    description: 'Conjunto de acessórios premium para customizar seu avatar.',
+    emoji: '💍',
+    gradient: 'linear-gradient(135deg, #78350f 0%, #d97706 100%)',
+    link: 'https://imvu.com',
+  },
+  {
+    id: 3,
+    name: 'Bundle Masculino',
+    description: 'Seleção curada de roupas e poses para avatares masculinos.',
+    emoji: '👔',
+    gradient: 'linear-gradient(135deg, #1e3a8a 0%, #6366f1 100%)',
+    link: 'https://imvu.com',
+  },
+];
+
+// Estações de rádio com links de streaming ao vivo
 const RADIO_STATIONS = [
   {
     id: 1,
@@ -68,6 +90,27 @@ const RADIO_STATIONS = [
     genre: 'Pop / Eletrônico',
     streamUrl: 'https://s4.radio.co/seec67ef36/listen',
     emoji: '📻',
+  },
+  {
+    id: 2,
+    name: 'Surfer Network FM',
+    genre: 'Dance / House',
+    streamUrl: 'https://stream-285.surfernetwork.com/x9ko0jn9mzauv',
+    emoji: '🎵',
+  },
+  {
+    id: 3,
+    name: 'Surf Wave Radio',
+    genre: 'Pop / R&B',
+    streamUrl: 'https://stream-176.surfernetwork.com/i8fbh0i6hv5uv',
+    emoji: '🌊',
+  },
+  {
+    id: 4,
+    name: 'Zeno Radio',
+    genre: 'Variado',
+    streamUrl: 'https://stream.zeno.fm/mlugl0ydfdeuv',
+    emoji: '🎶',
   },
 ];
 
@@ -363,114 +406,30 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Rooms Showcase Section */}
-      <section className="landing-rooms">
-        <h2 className="landing-rooms__title">🏠 Rooms & Decorações</h2>
-        <p className="landing-rooms__subtitle">Transforme seu espaço virtual com decorações temáticas prontas:</p>
-
-        <div className="landing-rooms__grid">
-          <div className="landing-room-card">
-            <div className="landing-room-card__img-wrap">
-              <img src="/images/room_romantic.jpg" alt="Sala Romântica" className="landing-room-card__img" onError={(e) => { e.currentTarget.src = '/images/credits.png' }} />
-            </div>
-            <div className="landing-room-card__content">
-              <h4 className="landing-room-card__title">Sala Romântica</h4>
-              <p className="landing-room-card__price">R$ 29,90</p>
-              <button
-                className="landing-room-card__btn"
-                onClick={() => navigate('/produto/room-romantica-imvu')}
-              >
-                Detalhes
-              </button>
-            </div>
-          </div>
-
-          <div className="landing-room-card">
-            <div className="landing-room-card__img-wrap">
-              <img src="/images/room_wedding.jpg" alt="Decoração de Casamento" className="landing-room-card__img" onError={(e) => { e.currentTarget.src = '/images/credits.png' }} />
-            </div>
-            <div className="landing-room-card__content">
-              <h4 className="landing-room-card__title">Decoração Casamento</h4>
-              <p className="landing-room-card__price">R$ 49,90</p>
-              <button
-                className="landing-room-card__btn"
-                onClick={() => navigate('/produto/decoracao-casamento-imvu')}
-              >
-                Detalhes
-              </button>
-            </div>
-          </div>
+      {/* ── DIVULGAÇÃO: ROOMS PÚBLICAS ── */}
+      <section className="landing-promo" id="rooms">
+        <div className="landing-promo__header">
+          <h2 className="landing-promo__title">🏠 Rooms em Destaque</h2>
+          <p className="landing-promo__subtitle">Salas públicas para você visitar no IMVU — clique e entre!</p>
         </div>
-        <div style={{ textAlign: 'center', marginTop: '20px' }}>
-          <button
-            className="landing-hero__btn-secondary"
-            style={{ width: 'auto', display: 'inline-block', padding: '10px 24px' }}
-            onClick={() => navigate('/categoria/rooms')}
-          >
-            Ver Todas as Salas
-          </button>
-        </div>
-      </section>
-
-      {/* Testimonials / Trust Stats */}
-      <section className="landing-reviews">
-        <h2 className="landing-reviews__title">⭐ Quem já comprou aprova!</h2>
-        <div className="landing-reviews__grid">
-          <div className="landing-review-card">
-            <div className="landing-review-card__header">
-              <div className="landing-review-card__user">
-                <span className="landing-review-card__avatar">💜</span>
-                <span className="landing-review-card__name">Beatriz_imvu</span>
+        <div className="landing-promo__grid">
+          {PROMO_ROOMS.map((room) => (
+            <div key={room.id} className="landing-promo-card">
+              <div className="landing-promo-card__banner" style={{ background: room.gradient }}>
+                <span className="landing-promo-card__emoji">{room.emoji}</span>
+                <span className="landing-promo-card__badge">🏠 Room Pública</span>
               </div>
-              <span className="landing-review-card__rating">★★★★★</span>
-            </div>
-            <p className="landing-review-card__text">
-              "Comprei o AP e chegou super rápido! O atendimento do suporte no WhatsApp foi excelente."
-            </p>
-          </div>
-
-          <div className="landing-review-card">
-            <div className="landing-review-card__header">
-              <div className="landing-review-card__user">
-                <span className="landing-review-card__avatar">🎮</span>
-                <span className="landing-review-card__name">ThiagoGamer</span>
-              </div>
-              <span className="landing-review-card__rating">★★★★★</span>
-            </div>
-            <p className="landing-review-card__text">
-              "Sempre compro créditos aqui. Rápido, seguro e mais barato do que comprar direto no jogo."
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Showcase / Divulgação Section */}
-      <section className="landing-showcase">
-        <h2 className="landing-showcase__title">🌟 Destaques & Divulgação</h2>
-        <p className="landing-showcase__subtitle">Rooms, produtos e espaços em destaque no universo IMVU:</p>
-        <div className="landing-showcase__grid">
-          {SHOWCASE_ITEMS.map((item) => (
-            <div key={item.id} className="landing-showcase-card">
-              <div
-                className="landing-showcase-card__banner"
-                style={{ background: item.gradient }}
-              >
-                <span className="landing-showcase-card__emoji">{item.emoji}</span>
-                <span className="landing-showcase-card__type-badge">
-                  {item.type === 'room' ? '🏠 Room' : '🛍️ Produto'}
-                </span>
-              </div>
-              <div className="landing-showcase-card__body">
-                <h3 className="landing-showcase-card__name">{item.title}</h3>
-                <p className="landing-showcase-card__desc">{item.description}</p>
+              <div className="landing-promo-card__body">
+                <h3 className="landing-promo-card__name">{room.name}</h3>
+                <p className="landing-promo-card__desc">{room.description}</p>
                 <a
-                  href={item.link}
+                  href={room.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="landing-showcase-card__btn"
+                  className="landing-promo-card__btn"
                 >
-                  <ExternalLink size={14} />
-                  {item.btnLabel}
+                  <ExternalLink size={13} />
+                  Visitar Sala
                 </a>
               </div>
             </div>
@@ -478,14 +437,44 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Radio Section */}
-      <section className="landing-radio">
+      {/* ── DIVULGAÇÃO: PRODUTOS ── */}
+      <section className="landing-promo landing-promo--alt" id="produtos">
+        <div className="landing-promo__header">
+          <h2 className="landing-promo__title">🛍️ Produtos em Destaque</h2>
+          <p className="landing-promo__subtitle">Looks e itens exclusivos no catálogo IMVU — confira!</p>
+        </div>
+        <div className="landing-promo__grid">
+          {PROMO_PRODUCTS.map((product) => (
+            <div key={product.id} className="landing-promo-card">
+              <div className="landing-promo-card__banner" style={{ background: product.gradient }}>
+                <span className="landing-promo-card__emoji">{product.emoji}</span>
+                <span className="landing-promo-card__badge">🛍️ Produto</span>
+              </div>
+              <div className="landing-promo-card__body">
+                <h3 className="landing-promo-card__name">{product.name}</h3>
+                <p className="landing-promo-card__desc">{product.description}</p>
+                <a
+                  href={product.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="landing-promo-card__btn landing-promo-card__btn--product"
+                >
+                  <ExternalLink size={13} />
+                  Ver Produto
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── RÁDIOS AO VIVO ── */}
+      <section className="landing-radio" id="radio">
         <div className="landing-radio__header">
           <Radio size={22} style={{ color: 'var(--brand-accent)' }} />
           <h2 className="landing-radio__title">Rádio ao Vivo</h2>
         </div>
-        <p className="landing-radio__subtitle">Ouça nossas estações em tempo real — direto do navegador!</p>
-
+        <p className="landing-radio__subtitle">Estações em transmissão em tempo real — ouça direto aqui!</p>
         <div className="landing-radio__list">
           {RADIO_STATIONS.map((station) => {
             const isPlaying = playingRadioId === station.id;
@@ -494,7 +483,7 @@ export default function LandingPage() {
               <div key={station.id} className={`landing-radio-card ${isPlaying ? 'landing-radio-card--playing' : ''}`}>
                 <div className="landing-radio-card__info">
                   <span className="landing-radio-card__emoji">{station.emoji}</span>
-                  <div>
+                  <div className="landing-radio-card__text">
                     <p className="landing-radio-card__name">{station.name}</p>
                     <p className="landing-radio-card__genre">{station.genre}</p>
                   </div>
@@ -525,6 +514,37 @@ export default function LandingPage() {
               </div>
             );
           })}
+        </div>
+      </section>
+
+      {/* ── DEPOIMENTOS ── */}
+      <section className="landing-reviews">
+        <h2 className="landing-reviews__title">⭐ Quem já comprou aprova!</h2>
+        <div className="landing-reviews__grid">
+          <div className="landing-review-card">
+            <div className="landing-review-card__header">
+              <div className="landing-review-card__user">
+                <span className="landing-review-card__avatar">💜</span>
+                <span className="landing-review-card__name">Beatriz_imvu</span>
+              </div>
+              <span className="landing-review-card__rating">★★★★★</span>
+            </div>
+            <p className="landing-review-card__text">
+              "Comprei o AP e chegou super rápido! O atendimento do suporte no WhatsApp foi excelente."
+            </p>
+          </div>
+          <div className="landing-review-card">
+            <div className="landing-review-card__header">
+              <div className="landing-review-card__user">
+                <span className="landing-review-card__avatar">🎮</span>
+                <span className="landing-review-card__name">ThiagoGamer</span>
+              </div>
+              <span className="landing-review-card__rating">★★★★★</span>
+            </div>
+            <p className="landing-review-card__text">
+              "Sempre compro créditos aqui. Rápido, seguro e mais barato do que comprar direto no jogo."
+            </p>
+          </div>
         </div>
       </section>
 
