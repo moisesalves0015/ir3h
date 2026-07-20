@@ -1140,432 +1140,511 @@
 }
 
 /* ============================================================
-   PROMO / DIVULGAÇÃO SECTIONS (ROOMS & PRODUTOS)
+   SHOWCASE SECTIONS (ROOMS, SHOPS, RÁDIOS) — UI PREMIUM
    ============================================================ */
 
-.landing-promo {
-  padding: 40px 16px;
+.showcase {
+  padding: 56px 16px 40px;
   background: var(--color-bg);
-}
-
-.landing-promo--alt {
-  background: var(--color-surface);
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.landing-promo__header {
-  margin-bottom: 28px;
-}
-
-.landing-promo__title {
-  font-size: var(--font-2xl);
-  font-weight: 800;
-  text-align: center;
-  margin-bottom: 8px;
-  color: #fff;
-}
-
-.landing-promo__subtitle {
-  font-size: var(--font-sm);
-  color: var(--text-secondary);
-  text-align: center;
-}
-
-.landing-promo__slider-container {
-  width: 100%;
-  overflow: hidden;
-}
-
-.landing-promo__slider {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  padding-bottom: 16px; /* Para o scrollbar não cortar conteúdo */
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  
-  /* Esconder a barra de rolagem (opcional, se preferir limpo) */
-  scrollbar-width: thin;
-  scrollbar-color: var(--brand-primary) var(--color-surface);
-}
-
-.landing-promo__slider::-webkit-scrollbar {
-  height: 6px;
-}
-.landing-promo__slider::-webkit-scrollbar-track {
-  background: var(--color-surface);
-  border-radius: 4px;
-}
-.landing-promo__slider::-webkit-scrollbar-thumb {
-  background: var(--brand-primary);
-  border-radius: 4px;
-}
-
-.landing-promo-card {
-  flex: 0 0 calc(80% - 20px);
-  scroll-snap-align: start;
-  background: var(--color-surface);
-  border: 1px solid rgba(255, 255, 255, 0.05); /* Mais suave */
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-card); /* Usando a variável global de shadow */
-  transition: transform var(--transition), box-shadow var(--transition);
-}
-
-.landing-promo--alt .landing-promo-card {
-  background: rgba(15, 10, 25, 0.6);
-  border-color: rgba(255, 255, 255, 0.02);
-}
-
-.landing-promo-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
-}
-
-.landing-promo-card__banner {
-  aspect-ratio: 16/9; /* Proporção moderna para banners */
-  height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
-  overflow: hidden;
 }
 
-.landing-promo-card__bg-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.showcase--dark {
+  background: #0a0614;
 }
 
-.landing-promo-card:hover .landing-promo-card__bg-img {
-  transform: scale(1.05);
+.showcase--radio {
+  background: linear-gradient(180deg, #070313 0%, var(--color-bg) 100%);
 }
 
-.landing-promo-card__badge {
-  position: absolute;
-  top: 10px;
-  left: 10px; /* Mudado para esquerda para se assemelhar ao pcard */
-  background: rgba(0, 0, 0, 0.6);
-  color: #fff;
-  font-size: 9px;
-  font-weight: 700;
-  padding: 4px 8px;
-  border-radius: var(--radius-sm); /* Mais quadrado */
-  backdrop-filter: blur(8px);
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+/* Header compacto estilo Netflix/Spotify */
+.showcase__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 24px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 4px;
 }
 
-.landing-promo-card__body {
-  padding: 16px;
+.showcase__head-left {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 
-.landing-promo-card__name {
-  font-size: var(--font-base);
-  font-weight: 700;
-  color: #fff;
-}
-
-.landing-promo-card__desc {
-  font-size: var(--font-xs);
-  color: var(--text-secondary);
-  line-height: 1.5;
-}
-
-.landing-promo-card__btn {
+.showcase__label {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 6px;
-  margin-top: 6px;
-  background: linear-gradient(135deg, #10b981, #059669); /* Verde para rooms */
-  color: #fff;
-  font-size: var(--font-xs);
+  font-size: 11px;
   font-weight: 700;
-  padding: 10px 16px;
-  border-radius: var(--radius-md);
-  text-decoration: none;
-  width: fit-content;
-  transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--brand-primary-light);
+  opacity: 0.9;
 }
 
-.landing-promo-card__btn--product {
-  background: linear-gradient(135deg, var(--brand-primary), var(--brand-primary-dark)); /* Roxo para produtos */
-}
-
-.landing-promo-card__btn:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.1);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
-}
-
-.landing-promo-card__btn--product:hover {
-  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
-}
-
-.landing-promo-card__btn--shop {
-  background: linear-gradient(135deg, var(--brand-primary), var(--brand-primary-dark));
-}
-.landing-promo-card__btn--shop:hover {
-  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
-}
-
-@media (min-width: 768px) {
-  .landing-promo {
-    padding: 70px 40px;
-  }
-
-  .landing-promo__slider-container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .landing-promo__slider {
-    gap: 30px;
-  }
-
-  .landing-promo-card {
-    flex: 0 0 calc(33.333% - 20px); /* 3 cards on desktop */
-  }
-
-  .landing-promo-card__banner {
-    height: 160px;
-  }
-}
-
-/* ============================================================
-   RÁDIO AO VIVO SECTION
-   ============================================================ */
-
-.landing-radio {
-  padding: 50px 16px;
-  background: var(--color-bg);
-}
-
-.landing-radio__header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 8px;
-}
-
-.landing-radio__title {
-  font-size: var(--font-2xl);
+.showcase__title {
+  font-size: clamp(22px, 5vw, 32px);
   font-weight: 800;
-  color: #fff;
-}
-
-.landing-radio__subtitle {
-  font-size: var(--font-sm);
-  color: var(--text-secondary);
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-.landing-radio__slider-container {
-  width: 100%;
-  overflow: hidden;
-}
-
-.landing-radio__slider {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  padding-bottom: 16px;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  
-  scrollbar-width: thin;
-  scrollbar-color: var(--brand-primary) var(--color-surface);
-}
-
-.landing-radio__slider::-webkit-scrollbar {
-  height: 6px;
-}
-.landing-radio__slider::-webkit-scrollbar-track {
-  background: var(--color-surface);
-  border-radius: 4px;
-}
-.landing-radio__slider::-webkit-scrollbar-thumb {
-  background: var(--brand-primary);
-  border-radius: 4px;
-}
-
-.landing-radio-card {
-  flex: 0 0 calc(60% - 16px); /* Cartão mais quadrado no mobile */
-  scroll-snap-align: start;
-  background: var(--color-surface);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: var(--radius-md);
-  padding: 20px 16px;
-  display: flex;
-  flex-direction: column; /* Organização vertical para ser "quadrado" */
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  text-align: center;
-  box-shadow: var(--shadow-card);
-  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
-}
-
-.landing-radio-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-}
-
-.landing-radio-card--playing {
-  border-color: var(--brand-accent);
-  box-shadow: 0 0 24px rgba(251, 191, 36, 0.2);
-  background: rgba(251, 191, 36, 0.03);
-}
-
-.landing-radio-card__info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  width: 100%;
-}
-
-.landing-radio-card__emoji {
-  font-size: 48px;
-  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
-  transition: transform var(--transition);
-}
-
-.landing-radio-card:hover .landing-radio-card__emoji {
-  transform: scale(1.1);
-}
-
-.landing-radio-card__text {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  align-items: center;
-}
-
-.landing-radio-card__name {
-  font-size: var(--font-base);
-  font-weight: 700;
   color: #fff;
   line-height: 1.1;
 }
 
-.landing-radio-card__genre {
+.showcase__sub {
   font-size: var(--font-xs);
-  color: var(--brand-accent);
-  font-weight: 600;
+  color: var(--text-secondary);
+  max-width: 420px;
 }
 
-/* Animated sound wave */
-.landing-radio-card__wave {
+.showcase__head-right {
+  flex-shrink: 0;
+}
+
+.showcase__count {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  padding: 4px 12px;
+  white-space: nowrap;
+}
+
+/* Rail (horizontal scroller) */
+.showcase__rail-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.showcase__rail {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding: 4px 4px 20px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(139, 92, 246, 0.5) transparent;
+}
+
+.showcase__rail::-webkit-scrollbar { height: 4px; }
+.showcase__rail::-webkit-scrollbar-track { background: transparent; }
+.showcase__rail::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.5);
+  border-radius: 4px;
+}
+
+/* CTA strip below showcase */
+.showcase__cta-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 24px auto 0;
+  padding: 16px 20px;
+  background: rgba(139, 92, 246, 0.08);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: var(--radius-lg);
+}
+
+.showcase__cta-strip--shop {
+  background: rgba(219, 39, 119, 0.07);
+  border-color: rgba(219, 39, 119, 0.2);
+}
+
+.showcase__cta-text {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+.showcase__cta-btn {
+  flex-shrink: 0;
+  background: linear-gradient(135deg, var(--brand-primary), var(--brand-primary-dark));
+  color: #fff;
+  font-size: var(--font-xs);
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.showcase__cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
+}
+
+.showcase__cta-btn--shop {
+  background: linear-gradient(135deg, #db2777, #9d174d);
+}
+
+.showcase__cta-btn--shop:hover {
+  box-shadow: 0 6px 20px rgba(219, 39, 119, 0.5);
+}
+
+/* ────────────────────────────────────────
+   SCARD — Rooms & Shops cards
+   ──────────────────────────────────────── */
+
+.scard {
+  flex: 0 0 76vw; /* Mobile: quase full-width */
+  scroll-snap-align: start;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.scard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Image area */
+.scard__img-wrap {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+}
+
+.scard__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: block;
+}
+
+.scard:hover .scard__img {
+  transform: scale(1.07);
+}
+
+/* Dark overlay that intensifies on hover */
+.scard__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.1) 55%, transparent 100%);
+  transition: opacity 0.3s ease;
+}
+
+/* Chip/badge top-left */
+.scard__chip {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: var(--radius-sm);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.scard__chip--room {
+  background: rgba(16, 185, 129, 0.85);
+}
+
+.scard__chip--shop {
+  background: rgba(139, 92, 246, 0.85);
+}
+
+/* Hover CTA that slides up from bottom of image */
+.scard__cta-hover {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(139, 92, 246, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  transform: translateY(100%);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scard--room .scard__cta-hover {
+  background: rgba(16, 185, 129, 0.92);
+}
+
+.scard:hover .scard__cta-hover {
+  transform: translateY(0);
+}
+
+/* Card body */
+.scard__body {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.scard__name {
+  font-size: var(--font-base);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.25;
+}
+
+.scard__desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Desktop: 3 cards visible */
+@media (min-width: 640px) {
+  .scard {
+    flex: 0 0 calc(40% - 7px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .scard {
+    flex: 0 0 calc(30% - 10px);
+  }
+}
+
+/* ────────────────────────────────────────
+   RCARD — Radio cards (square / compact)
+   ──────────────────────────────────────── */
+
+.rcard {
+  flex: 0 0 56vw;
+  scroll-snap-align: start;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: rgba(15, 10, 30, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.rcard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+.rcard--playing {
+  border-color: var(--brand-accent);
+  box-shadow: 0 0 28px rgba(251, 191, 36, 0.25), 0 4px 20px rgba(0,0,0,0.4);
+}
+
+/* Art / visual area */
+.rcard__art {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a0a2e 0%, #0d0622 100%);
+  overflow: hidden;
+}
+
+.rcard--playing .rcard__art {
+  background: linear-gradient(135deg, #2d1060 0%, #1a0540 100%);
+}
+
+.rcard__emoji {
+  font-size: 52px;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+  z-index: 1;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.rcard:hover .rcard__emoji {
+  transform: scale(1.1);
+}
+
+/* Animated wave */
+.rcard__wave {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: flex-end;
-  justify-content: center;
-  gap: 4px;
-  height: 24px;
-  margin-top: 8px;
-  width: 100%;
+  gap: 3px;
+  height: 18px;
 }
 
-.landing-radio-card__wave span {
+.rcard__wave span {
   display: block;
-  width: 4px;
+  width: 3px;
   background: var(--brand-accent);
   border-radius: 2px;
   animation: soundWave 1s ease-in-out infinite alternate;
 }
+.rcard__wave span:nth-child(1) { height: 8px; animation-delay: 0s; }
+.rcard__wave span:nth-child(2) { height: 16px; animation-delay: 0.15s; }
+.rcard__wave span:nth-child(3) { height: 12px; animation-delay: 0.3s; }
+.rcard__wave span:nth-child(4) { height: 18px; animation-delay: 0.45s; }
 
-.landing-radio-card__wave span:nth-child(1) { height: 10px; animation-delay: 0s; }
-.landing-radio-card__wave span:nth-child(2) { height: 20px; animation-delay: 0.15s; }
-.landing-radio-card__wave span:nth-child(3) { height: 14px; animation-delay: 0.3s; }
-.landing-radio-card__wave span:nth-child(4) { height: 24px; animation-delay: 0.45s; }
+/* Subtle pulsing ring when not playing */
+.rcard__pulse {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid rgba(139, 92, 246, 0.3);
+  animation: pulsate 2s ease-out infinite;
+}
+
+@keyframes pulsate {
+  0%   { transform: scale(0.8); opacity: 0.6; }
+  70%  { transform: scale(1.3); opacity: 0; }
+  100% { transform: scale(0.8); opacity: 0; }
+}
+
+/* "AO VIVO" badge top */
+.rcard__live-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--brand-accent);
+  background: rgba(0,0,0,0.7);
+  padding: 3px 7px;
+  border-radius: 4px;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.rcard--playing .rcard__live-badge {
+  color: #fff;
+  background: rgba(251, 191, 36, 0.85);
+  border-color: transparent;
+}
+
+/* Info block */
+.rcard__info {
+  padding: 12px 14px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rcard__name {
+  font-size: var(--font-sm);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rcard__genre {
+  font-size: 11px;
+  color: var(--brand-accent);
+  font-weight: 600;
+}
+
+/* Actions */
+.rcard__actions {
+  display: flex;
+  gap: 8px;
+  padding: 0 14px 14px;
+  margin-top: auto;
+}
+
+.rcard__play-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  background: linear-gradient(135deg, var(--brand-primary), var(--brand-primary-dark));
+  color: #fff;
+  border-radius: var(--radius-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.rcard__play-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.5);
+}
+
+.rcard__play-btn--stop {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.rcard__play-btn--stop:hover {
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.5);
+}
+
+.rcard__copy-btn {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  transition: background var(--transition), color var(--transition);
+  flex-shrink: 0;
+}
+
+.rcard__copy-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+@media (min-width: 640px) {
+  .rcard {
+    flex: 0 0 calc(30% - 10px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .rcard {
+    flex: 0 0 calc(22% - 10px);
+  }
+  
+  .showcase {
+    padding: 72px 40px 52px;
+  }
+
+  .showcase__head {
+    margin-bottom: 32px;
+  }
+}
 
 @keyframes soundWave {
   0%   { transform: scaleY(0.4); opacity: 0.7; }
   100% { transform: scaleY(1);   opacity: 1; }
 }
-
-.landing-radio-card__actions {
-  display: flex;
-  flex-direction: column; /* Botões um em cima do outro ou lado a lado se preferir. Vamos colocar lado a lado */
-  flex-direction: row;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  margin-top: auto;
-}
-
-.landing-radio-card__play {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-  gap: 6px;
-  background: linear-gradient(135deg, var(--brand-primary), var(--brand-primary-dark));
-  color: #fff;
-  font-size: var(--font-xs);
-  font-weight: 700;
-  padding: 10px 0;
-  border-radius: var(--radius-sm);
-  transition: transform var(--transition), box-shadow var(--transition);
-}
-
-.landing-radio-card__play--active {
-  background: linear-gradient(135deg, #ef4444, #dc2626);
-  box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
-}
-
-.landing-radio-card__play:hover {
-  transform: translateY(-2px);
-}
-
-.landing-radio-card__copy {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-  gap: 6px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #fff;
-  font-size: var(--font-xs);
-  font-weight: 600;
-  padding: 10px 0;
-  border-radius: var(--radius-sm);
-  transition: background var(--transition), color var(--transition), border-color var(--transition);
-}
-
-.landing-radio-card__copy:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-@media (min-width: 768px) {
-  .landing-radio {
-    padding: 70px 40px;
-  }
-
-  .landing-radio__slider-container {
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-  
-  .landing-radio__slider {
-    gap: 20px;
-  }
-  
-  .landing-radio-card {
-    flex: 0 0 calc(25% - 15px); /* 4 por linha no desktop, para ficarem "quadrados" */
-  }
-}
-
-

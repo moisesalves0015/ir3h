@@ -401,113 +401,146 @@ export default function LandingPage() {
       </section>
 
       {/* ── DIVULGAÇÃO: ROOMS PÚBLICAS ── */}
-      <section className="landing-promo" id="rooms">
-        <div className="landing-promo__header">
-          <h2 className="landing-promo__title">🏠 Rooms em Destaque</h2>
-          <p className="landing-promo__subtitle">Salas públicas para você visitar no IMVU — clique e entre!</p>
+      <section className="showcase" id="rooms">
+        <div className="showcase__head">
+          <div className="showcase__head-left">
+            <span className="showcase__label">🏠 Explorar Salas</span>
+            <h2 className="showcase__title">Rooms em Destaque</h2>
+            <p className="showcase__sub">Salas públicas curadas para você visitar agora mesmo no IMVU</p>
+          </div>
+          <div className="showcase__head-right">
+            <span className="showcase__count">{PROMO_ROOMS.length} salas disponíveis</span>
+          </div>
         </div>
-        <div className="landing-promo__slider-container">
-          <div className="landing-promo__slider">
+        <div className="showcase__rail-wrap">
+          <div className="showcase__rail">
             {PROMO_ROOMS.map((room) => (
-              <div key={room.id} className="landing-promo-card">
-                <div className="landing-promo-card__banner">
-                  <img src={room.imgUrl} alt={room.name} className="landing-promo-card__bg-img" />
-                  <span className="landing-promo-card__badge">🏠 Room Pública</span>
+              <a
+                key={room.id}
+                href={room.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="scard scard--room"
+              >
+                <div className="scard__img-wrap">
+                  <img src={room.imgUrl} alt={room.name} className="scard__img" />
+                  <div className="scard__overlay" />
+                  <span className="scard__chip scard__chip--room">🏠 Pública</span>
+                  <div className="scard__cta-hover">
+                    <span>Entrar na Sala</span>
+                    <ExternalLink size={14} />
+                  </div>
                 </div>
-                <div className="landing-promo-card__body">
-                  <h3 className="landing-promo-card__name">{room.name}</h3>
-                  <p className="landing-promo-card__desc">{room.description}</p>
-                  <a
-                    href={room.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="landing-promo-card__btn"
-                  >
-                    <ExternalLink size={13} />
-                    Visitar Sala
-                  </a>
+                <div className="scard__body">
+                  <p className="scard__name">{room.name}</p>
+                  <p className="scard__desc">{room.description}</p>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
+        </div>
+        <div className="showcase__cta-strip">
+          <p className="showcase__cta-text">💰 Gosta do que vê? Compre créditos e personalize sua própria sala!</p>
+          <button className="showcase__cta-btn" onClick={() => navigate('/ir3h-store')}>
+            Comprar Créditos
+          </button>
         </div>
       </section>
 
       {/* ── DIVULGAÇÃO: SHOPS ── */}
-      <section className="landing-promo landing-promo--alt" id="shops">
-        <div className="landing-promo__header">
-          <h2 className="landing-promo__title">🛍️ Shops em Destaque</h2>
-          <p className="landing-promo__subtitle">Conheça as melhores lojas e catálogos do IMVU — confira!</p>
+      <section className="showcase showcase--dark" id="shops">
+        <div className="showcase__head">
+          <div className="showcase__head-left">
+            <span className="showcase__label">🛍️ Descobrir Lojas</span>
+            <h2 className="showcase__title">Shops em Destaque</h2>
+            <p className="showcase__sub">Catálogos e lojas selecionadas com itens exclusivos para o seu avatar</p>
+          </div>
+          <div className="showcase__head-right">
+            <span className="showcase__count">{PROMO_SHOPS.length} lojas disponíveis</span>
+          </div>
         </div>
-        <div className="landing-promo__slider-container">
-          <div className="landing-promo__slider">
+        <div className="showcase__rail-wrap">
+          <div className="showcase__rail">
             {PROMO_SHOPS.map((shop) => (
-              <div key={shop.id} className="landing-promo-card">
-                <div className="landing-promo-card__banner">
-                  <img src={shop.imgUrl} alt={shop.name} className="landing-promo-card__bg-img" />
-                  <span className="landing-promo-card__badge">🛍️ Shop</span>
+              <a
+                key={shop.id}
+                href={shop.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="scard scard--shop"
+              >
+                <div className="scard__img-wrap">
+                  <img src={shop.imgUrl} alt={shop.name} className="scard__img" />
+                  <div className="scard__overlay" />
+                  <span className="scard__chip scard__chip--shop">🛍️ Shop</span>
+                  <div className="scard__cta-hover">
+                    <span>Ver Loja</span>
+                    <ExternalLink size={14} />
+                  </div>
                 </div>
-                <div className="landing-promo-card__body">
-                  <h3 className="landing-promo-card__name">{shop.name}</h3>
-                  <p className="landing-promo-card__desc">{shop.description}</p>
-                  <a
-                    href={shop.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="landing-promo-card__btn landing-promo-card__btn--shop"
-                  >
-                    <ExternalLink size={13} />
-                    Visitar Shop
-                  </a>
+                <div className="scard__body">
+                  <p className="scard__name">{shop.name}</p>
+                  <p className="scard__desc">{shop.description}</p>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
+        </div>
+        <div className="showcase__cta-strip showcase__cta-strip--shop">
+          <p className="showcase__cta-text">✨ Encontrou algo que gostou? Use seus créditos IR3H para comprar!</p>
+          <button className="showcase__cta-btn showcase__cta-btn--shop" onClick={() => navigate('/ir3h-store')}>
+            Obter Créditos
+          </button>
         </div>
       </section>
 
       {/* ── RÁDIOS AO VIVO ── */}
-      <section className="landing-radio" id="radio">
-        <div className="landing-radio__header">
-          <Radio size={22} style={{ color: 'var(--brand-accent)' }} />
-          <h2 className="landing-radio__title">Rádio ao Vivo</h2>
+      <section className="showcase showcase--radio" id="radio">
+        <div className="showcase__head">
+          <div className="showcase__head-left">
+            <span className="showcase__label"><Radio size={14} style={{ verticalAlign: 'middle' }} /> Ao Vivo Agora</span>
+            <h2 className="showcase__title">Rádio ao Vivo</h2>
+            <p className="showcase__sub">Estações em transmissão em tempo real — aperte play e curta!</p>
+          </div>
         </div>
-        <p className="landing-radio__subtitle">Estações em transmissão em tempo real — ouça direto aqui!</p>
-        <div className="landing-radio__slider-container">
-          <div className="landing-radio__slider">
+        <div className="showcase__rail-wrap">
+          <div className="showcase__rail">
             {RADIO_STATIONS.map((station) => {
               const isPlaying = playingRadioId === station.id;
               const isCopied = copiedRadioId === station.id;
               return (
-                <div key={station.id} className={`landing-radio-card ${isPlaying ? 'landing-radio-card--playing' : ''}`}>
-                  <div className="landing-radio-card__info">
-                    <span className="landing-radio-card__emoji">{station.emoji}</span>
-                    <div className="landing-radio-card__text">
-                      <p className="landing-radio-card__name">{station.name}</p>
-                      <p className="landing-radio-card__genre">{station.genre}</p>
-                    </div>
+                <div
+                  key={station.id}
+                  className={`rcard ${isPlaying ? 'rcard--playing' : ''}`}
+                >
+                  <div className="rcard__art">
+                    <span className="rcard__emoji">{station.emoji}</span>
                     {isPlaying && (
-                      <div className="landing-radio-card__wave">
+                      <div className="rcard__wave">
                         <span></span><span></span><span></span><span></span>
                       </div>
                     )}
+                    {!isPlaying && <div className="rcard__pulse" />}
+                    <span className="rcard__live-badge">● AO VIVO</span>
                   </div>
-                  <div className="landing-radio-card__actions">
+                  <div className="rcard__info">
+                    <p className="rcard__name">{station.name}</p>
+                    <p className="rcard__genre">{station.genre}</p>
+                  </div>
+                  <div className="rcard__actions">
                     <button
-                      className={`landing-radio-card__play ${isPlaying ? 'landing-radio-card__play--active' : ''}`}
+                      className={`rcard__play-btn ${isPlaying ? 'rcard__play-btn--stop' : ''}`}
                       onClick={() => handlePlayRadio(station)}
                       aria-label={isPlaying ? `Parar ${station.name}` : `Tocar ${station.name}`}
                     >
-                      {isPlaying ? <Square size={16} /> : <Play size={16} />}
-                      {isPlaying ? 'Parar' : 'Ouvir'}
+                      {isPlaying ? <Square size={18} /> : <Play size={18} />}
                     </button>
                     <button
-                      className="landing-radio-card__copy"
+                      className="rcard__copy-btn"
                       onClick={() => handleCopyLink(station.streamUrl, station.id)}
                       aria-label="Copiar link da rádio"
                     >
-                      {isCopied ? <Check size={15} /> : <Copy size={15} />}
-                      {isCopied ? 'Copiado!' : 'Copiar Link'}
+                      {isCopied ? <Check size={14} /> : <Copy size={14} />}
                     </button>
                   </div>
                 </div>
