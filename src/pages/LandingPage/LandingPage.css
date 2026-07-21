@@ -50,6 +50,7 @@
 .lp-header__brand strong {
   background: linear-gradient(135deg, var(--brand-primary-light), var(--brand-secondary));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -210,6 +211,7 @@
 .lp-hero__title span {
   background: linear-gradient(135deg, var(--brand-accent), #fbbf24);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 0 30px rgba(251, 191, 36, 0.2);
 }
@@ -1145,6 +1147,7 @@
 .lp-footer__logo span {
   background: linear-gradient(135deg, var(--brand-primary-light), var(--brand-secondary));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 

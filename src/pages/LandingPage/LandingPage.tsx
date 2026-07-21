@@ -28,6 +28,7 @@ import {
   HelpCircle,
   Users,
 } from 'lucide-react';
+import { useApp, type ShowcaseItem } from '../../contexts/AppContext';
 import './LandingPage.css';
 
 const CREDIT_PACKS = [
@@ -37,82 +38,18 @@ const CREDIT_PACKS = [
   { value: '100.000', label: '100k', price: 'R$ 179,90', originalPrice: 'R$ 220,00', savings: 'SAVE 18%', slug: '100k-creditos-imvu', badge: null },
 ];
 
-const PROMO_ROOMS = [
-  {
-    id: 1,
-    name: 'Sala VIP Exclusiva',
-    description: 'Room temática premium com decoração especial. Venha conhecer!',
-    imgUrl: 'https://i.pinimg.com/1200x/77/6f/11/776f11f2708aa43d734ab6b29c61dc98.jpg',
-    link: 'https://imvu.com',
-  },
-  {
-    id: 2,
-    name: 'Ambiente Noturno',
-    description: 'Sala night club com luzes neon e música ambiente para suas festas.',
-    imgUrl: 'https://i.pinimg.com/736x/52/6d/8f/526d8f3c93b6f76dddb903e4b057487b.jpg',
-    link: 'https://imvu.com',
-  },
-  {
-    id: 3,
-    name: 'Lounge Tropical',
-    description: 'Ambiente relaxante com decoração tropical. Perfeito para socializar.',
-    imgUrl: 'https://i.pinimg.com/736x/14/43/35/1443351d08deaef582490c6a918c510f.jpg',
-    link: 'https://imvu.com',
-  },
-];
-
-const PROMO_SHOPS = [
-  {
-    id: 1,
-    name: 'Loja de Outono',
-    description: 'Looks exclusivos de avatar disponíveis no catálogo da loja.',
-    imgUrl: 'https://i.pinimg.com/736x/56/dc/b7/56dcb7d8e766ed9bc23b85a11f762fb9.jpg',
-    link: 'https://imvu.com',
-  },
-  {
-    id: 2,
-    name: 'Acessórios VIP Shop',
-    description: 'Conjunto de acessórios premium para customizar seu avatar.',
-    imgUrl: 'https://i.pinimg.com/736x/f7/a6/b0/f7a6b0403cf16bc5be6bf9d4b349591a.jpg',
-    link: 'https://imvu.com',
-  },
-  {
-    id: 3,
-    name: 'Shop Masculino',
-    description: 'Seleção curada de roupas e poses para avatares masculinos.',
-    imgUrl: 'https://i.pinimg.com/736x/2d/61/ac/2d61acb4aa6ed07ed03864d3f57b701e.jpg',
-    link: 'https://imvu.com',
-  },
-];
-
-const RADIO_STATIONS = [
-  { id: 1, name: 'IR3H Radio', genre: 'Pop / Eletrônico', streamUrl: 'https://s4.radio.co/seec67ef36/listen', emoji: '📻' },
-  { id: 2, name: 'Surfer Network FM', genre: 'Dance / House', streamUrl: 'https://stream-285.surfernetwork.com/x9ko0jn9mzauv', emoji: '🎵' },
-  { id: 3, name: 'Surf Wave Radio', genre: 'Pop / R&B', streamUrl: 'https://stream-176.surfernetwork.com/i8fbh0i6hv5uv', emoji: '🌊' },
-  { id: 4, name: 'Zeno Radio', genre: 'Variado', streamUrl: 'https://stream.zeno.fm/mlugl0ydfdeuv', emoji: '🎶' },
-];
-
-const TESTIMONIALS = [
-  { id: 1, initials: 'BL', color: '#8b5cf6', name: 'Beatriz_imvu', text: '"Comprei o AP e chegou super rápido! O atendimento do suporte no WhatsApp foi excelente. Super indico!"', stars: 5 },
-  { id: 2, initials: 'TG', color: '#3b82f6', name: 'ThiagoGamer', text: '"Sempre compro créditos aqui. Rápido, seguro e muito mais barato do que comprar direto no jogo."', stars: 5 },
-  { id: 3, initials: 'KV', color: '#db2777', name: 'KarenVip_br', text: '"Comprei o VIP Platinum e ativou na hora! A IR3H é a melhor revendedora que já usei. Voltarei sempre."', stars: 5 },
-  { id: 4, initials: 'RL', color: '#10b981', name: 'RafaelLima99', text: '"Fiz meu primeiro pedido com receio mas foi perfeito. Entrega em menos de 10 minutos. Nota 10!"', stars: 5 },
-];
-
-const FAQS = [
-  { q: 'Como os créditos e passes são entregues?', a: 'A entrega é realizada via WhatsApp ou diretamente na sua conta IMVU por meio de Presente (Gift) ou Transferência Oficial. Todo o processo leva entre 5 a 15 minutos após a confirmação do pagamento.' },
-  { q: 'Preciso fornecer a senha do meu avatar?', a: 'Não! Para a grande maioria dos pacotes de créditos e passes (incluindo AP), nós não solicitamos sua senha. Precisamos apenas do seu Nick (Avatar Name) do IMVU.' },
-  { q: 'Quais são as formas de pagamento aceitas?', a: 'Aceitamos Pix (com aprovação e entrega imediata), Cartão de Crédito e Boleto Bancário.' },
-  { q: 'O serviço da IR3H é seguro?', a: 'Totalmente seguro. Trabalhamos exclusivamente com métodos oficiais do IMVU, garantindo que sua conta fique 100% protegida contra qualquer tipo de banimento.' },
-];
-
 export default function LandingPage() {
   const navigate = useNavigate();
+  const { showcases, landingConfig, settings } = useApp();
   const [selectedPackIndex, setSelectedPackIndex] = useState(1);
   const [faqOpenIndex, setFaqOpenIndex] = useState<number | null>(null);
   const [playingRadioId, setPlayingRadioId] = useState<number | null>(null);
   const [copiedRadioId, setCopiedRadioId] = useState<number | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const roomsShowcase = showcases.find(s => s.id === 'rooms');
+  const shopsShowcase = showcases.find(s => s.id === 'shops');
+  const radioShowcase = showcases.find(s => s.id === 'radio');
 
   const toggleFaq = (index: number) => {
     setFaqOpenIndex(faqOpenIndex === index ? null : index);
@@ -123,14 +60,22 @@ export default function LandingPage() {
     navigate(`/produto/${pack.slug}`);
   };
 
-  const handlePlayRadio = (station: typeof RADIO_STATIONS[0]) => {
+  const handlePlayRadio = (station: ShowcaseItem) => {
     if (playingRadioId === station.id) {
-      if (audioRef.current) { audioRef.current.pause(); audioRef.current.src = ''; audioRef.current = null; }
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.src = '';
+        audioRef.current = null;
+      }
       setPlayingRadioId(null);
     } else {
-      if (audioRef.current) { audioRef.current.pause(); audioRef.current.src = ''; }
-      const audio = new Audio(station.streamUrl);
-      audio.play().catch(() => window.open(station.streamUrl, '_blank', 'noopener'));
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.src = '';
+      }
+      const streamUrl = station.streamUrl || '';
+      const audio = new Audio(streamUrl);
+      audio.play().catch(() => window.open(streamUrl, '_blank', 'noopener'));
       audioRef.current = audio;
       setPlayingRadioId(station.id);
     }
@@ -150,12 +95,12 @@ export default function LandingPage() {
       <header className="lp-header">
         <button className="lp-header__brand" onClick={() => navigate('/')}>
           <Gem size={20} className="lp-header__brand-icon" />
-          <span>IR3H<strong>STORE</strong></span>
+          <span>{settings.logoText.slice(0, 4)}<strong>{settings.logoText.slice(4)}</strong></span>
         </button>
         <nav className="lp-header__nav">
           <a href="#calculator" className="lp-header__nav-link">Créditos</a>
-          <a href="#rooms" className="lp-header__nav-link">Rooms</a>
-          <a href="#radio" className="lp-header__nav-link">Rádio</a>
+          {roomsShowcase?.status && <a href="#rooms" className="lp-header__nav-link">Rooms</a>}
+          {radioShowcase?.status && <a href="#radio" className="lp-header__nav-link">Rádio</a>}
         </nav>
         <button
           className="lp-header__cta"
@@ -177,14 +122,16 @@ export default function LandingPage() {
           <div className="lp-hero__content">
             <div className="lp-hero__social-proof">
               <Users size={13} />
-              <span>+2.400 clientes atendidos</span>
+              <span>{landingConfig.hero.badgeText}</span>
             </div>
 
             <h1 className="lp-hero__title">
-              Eleve seu Avatar no IMVU com a <span>IR3H Store</span>
+              {landingConfig.hero.title.split('IR3H Store')[0]}
+              <span>IR3H Store</span>
+              {landingConfig.hero.title.split('IR3H Store')[1]}
             </h1>
             <p className="lp-hero__desc">
-              Créditos, Passes VIP, AP e Rooms com as melhores taxas do mercado. Envio em minutos, 100% seguro e garantido.
+              {landingConfig.hero.subtitle}
             </p>
 
             <div className="lp-hero__chips">
@@ -196,11 +143,11 @@ export default function LandingPage() {
             <div className="lp-hero__actions">
               <button className="lp-hero__btn-primary" onClick={() => navigate('/ir3h-store')}>
                 <ShoppingCart size={16} />
-                Acessar Loja Completa
+                {landingConfig.hero.primaryBtnText}
               </button>
               <a href="#calculator" className="lp-hero__btn-secondary">
                 <BarChart3 size={16} />
-                Simular Créditos
+                {landingConfig.hero.secondaryBtnText}
               </a>
             </div>
           </div>
@@ -222,7 +169,7 @@ export default function LandingPage() {
               </div>
 
               <div className="lp-visual-card__video-container">
-                <video src="/hero_video.mp4" autoPlay loop muted playsInline className="lp-visual-card__video" />
+                <video src={landingConfig.hero.videoUrl} autoPlay loop muted playsInline className="lp-visual-card__video" />
               </div>
 
               <div className="lp-visual-card__badges">
@@ -242,7 +189,7 @@ export default function LandingPage() {
             { icon: <Zap size={20} />, title: 'Entrega em até 15 min', desc: 'Créditos na sua conta rapidinho.' },
             { icon: <Shield size={20} />, title: '100% Seguro', desc: 'Métodos oficiais, zero banimento.' },
             { icon: <MessageSquare size={20} />, title: 'Suporte WhatsApp', desc: 'Atendimento humano e rápido.' },
-            { icon: <Gift size={20} />, title: 'Sem Senha', desc: 'Apenas seu Avatar Name.' },
+            { icon: <Gift size={20} />, title: 'Sem Senha', desc: 'Apenas seu Avatar Nick.' },
           ].map((item, i) => (
             <div key={i} className="lp-trust-card">
               <div className="lp-trust-card__icon">{item.icon}</div>
@@ -373,126 +320,132 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── ROOMS ── */}
-      <section className="showcase" id="rooms">
-        <div className="showcase__head">
-          <div className="showcase__head-left">
-            <span className="showcase__label"><Gift size={13} /> Explorar Salas</span>
-            <h2 className="showcase__title">Rooms em Destaque</h2>
-            <p className="showcase__sub">Salas públicas curadas para você visitar agora mesmo no IMVU</p>
+      {/* ── ROOMS SHOWCASE ── */}
+      {roomsShowcase && roomsShowcase.status && (
+        <section className="showcase" id="rooms">
+          <div className="showcase__head">
+            <div className="showcase__head-left">
+              <span className="showcase__label"><Gift size={13} /> {roomsShowcase.label}</span>
+              <h2 className="showcase__title">{roomsShowcase.title}</h2>
+              <p className="showcase__sub">{roomsShowcase.subtitle}</p>
+            </div>
+            <div className="showcase__head-right">
+              <span className="showcase__count">{roomsShowcase.items.length} salas disponíveis</span>
+            </div>
           </div>
-          <div className="showcase__head-right">
-            <span className="showcase__count">{PROMO_ROOMS.length} salas disponíveis</span>
+          <div className="showcase__rail-wrap">
+            <div className="showcase__rail">
+              {roomsShowcase.items.map((room) => (
+                <a key={room.id} href={room.link} target="_blank" rel="noopener noreferrer" className="scard scard--room">
+                  <div className="scard__img-wrap">
+                    <img src={room.imgUrl} alt={room.name} className="scard__img" />
+                    <div className="scard__overlay" />
+                    <span className="scard__chip scard__chip--room"><Gift size={9} /> Pública</span>
+                    <div className="scard__cta-hover"><span>Entrar na Sala</span><ExternalLink size={14} /></div>
+                  </div>
+                  <div className="scard__body">
+                    <p className="scard__name">{room.name}</p>
+                    <p className="scard__desc">{room.description}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
           </div>
-        </div>
-        <div className="showcase__rail-wrap">
-          <div className="showcase__rail">
-            {PROMO_ROOMS.map((room) => (
-              <a key={room.id} href={room.link} target="_blank" rel="noopener noreferrer" className="scard scard--room">
-                <div className="scard__img-wrap">
-                  <img src={room.imgUrl} alt={room.name} className="scard__img" />
-                  <div className="scard__overlay" />
-                  <span className="scard__chip scard__chip--room"><Gift size={9} /> Pública</span>
-                  <div className="scard__cta-hover"><span>Entrar na Sala</span><ExternalLink size={14} /></div>
-                </div>
-                <div className="scard__body">
-                  <p className="scard__name">{room.name}</p>
-                  <p className="scard__desc">{room.description}</p>
-                </div>
-              </a>
-            ))}
+          <div className="showcase__cta-strip">
+            <p className="showcase__cta-text">Quer sua própria sala? Compre créditos e customize o seu espaço!</p>
+            <button className="showcase__cta-btn" onClick={() => navigate('/ir3h-store')}>
+              <ShoppingCart size={13} /> Comprar Créditos
+            </button>
           </div>
-        </div>
-        <div className="showcase__cta-strip">
-          <p className="showcase__cta-text">Quer sua própria sala? Compre créditos e customize o seu espaço!</p>
-          <button className="showcase__cta-btn" onClick={() => navigate('/ir3h-store')}>
-            <ShoppingCart size={13} /> Comprar Créditos
-          </button>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* ── SHOPS ── */}
-      <section className="showcase showcase--dark" id="shops">
-        <div className="showcase__head">
-          <div className="showcase__head-left">
-            <span className="showcase__label"><ExternalLink size={13} /> Descobrir Lojas</span>
-            <h2 className="showcase__title">Shops em Destaque</h2>
-            <p className="showcase__sub">Catálogos e lojas selecionadas com itens exclusivos para o seu avatar</p>
+      {/* ── SHOPS SHOWCASE ── */}
+      {shopsShowcase && shopsShowcase.status && (
+        <section className="showcase showcase--dark" id="shops">
+          <div className="showcase__head">
+            <div className="showcase__head-left">
+              <span className="showcase__label"><ExternalLink size={13} /> {shopsShowcase.label}</span>
+              <h2 className="showcase__title">{shopsShowcase.title}</h2>
+              <p className="showcase__sub">{shopsShowcase.subtitle}</p>
+            </div>
+            <div className="showcase__head-right">
+              <span className="showcase__count">{shopsShowcase.items.length} lojas disponíveis</span>
+            </div>
           </div>
-          <div className="showcase__head-right">
-            <span className="showcase__count">{PROMO_SHOPS.length} lojas disponíveis</span>
+          <div className="showcase__rail-wrap">
+            <div className="showcase__rail">
+              {shopsShowcase.items.map((shop) => (
+                <a key={shop.id} href={shop.link} target="_blank" rel="noopener noreferrer" className="scard scard--shop">
+                  <div className="scard__img-wrap">
+                    <img src={shop.imgUrl} alt={shop.name} className="scard__img" />
+                    <div className="scard__overlay" />
+                    <span className="scard__chip scard__chip--shop"><ExternalLink size={9} /> Shop</span>
+                    <div className="scard__cta-hover"><span>Ver Loja</span><ExternalLink size={14} /></div>
+                  </div>
+                  <div className="scard__body">
+                    <p className="scard__name">{shop.name}</p>
+                    <p className="scard__desc">{shop.description}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
           </div>
-        </div>
-        <div className="showcase__rail-wrap">
-          <div className="showcase__rail">
-            {PROMO_SHOPS.map((shop) => (
-              <a key={shop.id} href={shop.link} target="_blank" rel="noopener noreferrer" className="scard scard--shop">
-                <div className="scard__img-wrap">
-                  <img src={shop.imgUrl} alt={shop.name} className="scard__img" />
-                  <div className="scard__overlay" />
-                  <span className="scard__chip scard__chip--shop"><ExternalLink size={9} /> Shop</span>
-                  <div className="scard__cta-hover"><span>Ver Loja</span><ExternalLink size={14} /></div>
-                </div>
-                <div className="scard__body">
-                  <p className="scard__name">{shop.name}</p>
-                  <p className="scard__desc">{shop.description}</p>
-                </div>
-              </a>
-            ))}
+          <div className="showcase__cta-strip showcase__cta-strip--shop">
+            <p className="showcase__cta-text">Encontrou algo que gostou? Use seus créditos IR3H para comprar!</p>
+            <button className="showcase__cta-btn showcase__cta-btn--shop" onClick={() => navigate('/ir3h-store')}>
+              <ShoppingCart size={13} /> Obter Créditos
+            </button>
           </div>
-        </div>
-        <div className="showcase__cta-strip showcase__cta-strip--shop">
-          <p className="showcase__cta-text">Encontrou algo que gostou? Use seus créditos IR3H para comprar!</p>
-          <button className="showcase__cta-btn showcase__cta-btn--shop" onClick={() => navigate('/ir3h-store')}>
-            <ShoppingCart size={13} /> Obter Créditos
-          </button>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* ── RÁDIOS ── */}
-      <section className="showcase showcase--radio" id="radio">
-        <div className="showcase__head">
-          <div className="showcase__head-left">
-            <span className="showcase__label"><Radio size={13} /> Ao Vivo Agora</span>
-            <h2 className="showcase__title">Rádio ao Vivo</h2>
-            <p className="showcase__sub">Estações em transmissão em tempo real — aperte play e curta!</p>
+      {/* ── RÁDIOS SHOWCASE ── */}
+      {radioShowcase && radioShowcase.status && (
+        <section className="showcase showcase--radio" id="radio">
+          <div className="showcase__head">
+            <div className="showcase__head-left">
+              <span className="showcase__label"><Radio size={13} /> {radioShowcase.label}</span>
+              <h2 className="showcase__title">{radioShowcase.title}</h2>
+              <p className="showcase__sub">{radioShowcase.subtitle}</p>
+            </div>
           </div>
-        </div>
-        <div className="showcase__rail-wrap">
-          <div className="showcase__rail">
-            {RADIO_STATIONS.map((station) => {
-              const isPlaying = playingRadioId === station.id;
-              const isCopied = copiedRadioId === station.id;
-              return (
-                <div key={station.id} className={`rcard ${isPlaying ? 'rcard--playing' : ''}`}>
-                  <div className="rcard__art">
-                    <span className="rcard__emoji">{station.emoji}</span>
-                    {isPlaying && <div className="rcard__wave"><span /><span /><span /><span /></div>}
-                    {!isPlaying && <div className="rcard__pulse" />}
-                    <span className="rcard__live-badge">● AO VIVO</span>
+          <div className="showcase__rail-wrap">
+            <div className="showcase__rail">
+              {radioShowcase.items.map((station) => {
+                const isPlaying = playingRadioId === station.id;
+                const isCopied = copiedRadioId === station.id;
+                return (
+                  <div key={station.id} className={`rcard ${isPlaying ? 'rcard--playing' : ''}`}>
+                    <div className="rcard__art">
+                      <span className="rcard__emoji">{station.emoji}</span>
+                      {isPlaying && <div className="rcard__wave"><span /><span /><span /><span /></div>}
+                      {!isPlaying && <div className="rcard__pulse" />}
+                      <span className="rcard__live-badge">● AO VIVO</span>
+                    </div>
+                    <div className="rcard__info">
+                      <p className="rcard__name">{station.name}</p>
+                      <p className="rcard__genre">{station.genre}</p>
+                    </div>
+                    <div className="rcard__actions">
+                      <button
+                        className={`rcard__play-btn ${isPlaying ? 'rcard__play-btn--stop' : ''}`}
+                        onClick={() => handlePlayRadio(station)}
+                        aria-label={isPlaying ? `Parar ${station.name}` : `Tocar ${station.name}`}
+                      >
+                        {isPlaying ? <Square size={18} /> : <Play size={18} />}
+                      </button>
+                      <button className="rcard__copy-btn" onClick={() => handleCopyLink(station.streamUrl || '', station.id)} aria-label="Copiar link da rádio">
+                        {isCopied ? <Check size={14} /> : <Copy size={14} />}
+                      </button>
+                    </div>
                   </div>
-                  <div className="rcard__info">
-                    <p className="rcard__name">{station.name}</p>
-                    <p className="rcard__genre">{station.genre}</p>
-                  </div>
-                  <div className="rcard__actions">
-                    <button
-                      className={`rcard__play-btn ${isPlaying ? 'rcard__play-btn--stop' : ''}`}
-                      onClick={() => handlePlayRadio(station)}
-                      aria-label={isPlaying ? `Parar ${station.name}` : `Tocar ${station.name}`}
-                    >
-                      {isPlaying ? <Square size={18} /> : <Play size={18} />}
-                    </button>
-                    <button className="rcard__copy-btn" onClick={() => handleCopyLink(station.streamUrl, station.id)} aria-label="Copiar link da rádio">
-                      {isCopied ? <Check size={14} /> : <Copy size={14} />}
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ── DEPOIMENTOS ── */}
       <section className="lp-reviews">
@@ -515,7 +468,7 @@ export default function LandingPage() {
           </div>
 
           <div className="lp-reviews__rail">
-            {TESTIMONIALS.map((t) => (
+            {landingConfig.reviews.map((t) => (
               <div key={t.id} className="lp-review-card">
                 <div className="lp-review-card__header">
                   <div className="lp-review-card__avatar" style={{ background: t.color }}>
@@ -548,7 +501,7 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="lp-faq__items">
-            {FAQS.map((faq, index) => (
+            {landingConfig.faqs.map((faq, index) => (
               <div key={index} className={`lp-faq-item ${faqOpenIndex === index ? 'lp-faq-item--open' : ''}`}>
                 <button
                   className="lp-faq-item__header"
@@ -573,10 +526,10 @@ export default function LandingPage() {
           <div className="lp-footer__col lp-footer__col--brand">
             <div className="lp-footer__logo">
               <Gem size={20} />
-              IR3H<span>STORE</span>
+              {landingConfig.footerLogo.slice(0, 4)}<span>{landingConfig.footerLogo.slice(4)}</span>
             </div>
             <p className="lp-footer__desc">
-              A maior e mais segura revendedora de créditos, passes e serviços IMVU do Brasil. Entrega rápida, suporte real.
+              {landingConfig.footerText}
             </p>
           </div>
 
@@ -611,7 +564,7 @@ export default function LandingPage() {
         </div>
 
         <div className="lp-footer__bottom">
-          <p>© {new Date().getFullYear()} IR3H Store. Todos os direitos reservados.</p>
+          <p>© {new Date().getFullYear()} {settings.siteName}. Todos os direitos reservados.</p>
           <p className="lp-footer__made">Feito com <Heart size={12} fill="currentColor" /> para a comunidade IMVU</p>
         </div>
       </footer>

@@ -13,6 +13,14 @@
   margin: 0 !important;
 }
 
+/* Admin panel: full-width, no max-width constraint, transparent background */
+.app-shell--admin {
+  max-width: 100% !important;
+  margin: 0 !important;
+  background: transparent;
+  min-height: 100dvh;
+}
+
 .app-scroll {
   flex: 1;
   overflow-y: auto;

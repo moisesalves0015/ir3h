@@ -1058,31 +1058,43 @@ export const allProducts: Product[] = [
   comboPrimeira,
 ];
 
+export const getStoredProducts = (): Product[] => {
+  try {
+    const stored = localStorage.getItem('ir3h_products');
+    if (stored) {
+      return JSON.parse(stored) as Product[];
+    }
+  } catch (e) {
+    console.error('Error reading ir3h_products from localStorage:', e);
+  }
+  return allProducts;
+};
+
 export const getProductBySlug = (slug: string): Product | undefined =>
-  allProducts.find(p => p.slug === slug);
+  getStoredProducts().find(p => p.slug === slug);
 
 export const getProductById = (id: number): Product | undefined =>
-  allProducts.find(p => p.id === id);
+  getStoredProducts().find(p => p.id === id);
 
 export const getProductsByCategory = (category: ProductCategory): Product[] =>
-  allProducts.filter(p => p.category === category);
+  getStoredProducts().filter(p => p.category === category);
 
 export const getFlashSaleProducts = (): Product[] =>
-  allProducts.filter(p => p.isFlashSale);
+  getStoredProducts().filter(p => p.isFlashSale);
 
 export const getNewArrivals = (): Product[] =>
-  allProducts.filter(p => p.isNewArrival);
+  getStoredProducts().filter(p => p.isNewArrival);
 
 export const getRecommended = (): Product[] =>
-  allProducts.filter(p => p.isRecommended);
+  getStoredProducts().filter(p => p.isRecommended);
 
 export const getFeatured = (): Product[] =>
-  allProducts.filter(p => p.featured);
+  getStoredProducts().filter(p => p.featured);
 
 export const searchProducts = (query: string): Product[] => {
   const q = query.toLowerCase().trim();
   if (!q) return [];
-  return allProducts.filter(p =>
+  return getStoredProducts().filter(p =>
     p.title.toLowerCase().includes(q) ||
     p.shortDescription.toLowerCase().includes(q) ||
     p.tags.some(t => t.toLowerCase().includes(q)) ||
@@ -1095,7 +1107,7 @@ export const getRelated = (product: Product, limit = 4): Product[] => {
     .map(id => getProductById(id))
     .filter(Boolean) as Product[];
   if (related.length < limit) {
-    const sameCategory = allProducts.filter(
+    const sameCategory = getStoredProducts().filter(
       p => p.category === product.category && p.id !== product.id && !product.relatedIds.includes(p.id)
     );
     return [...related, ...sameCategory].slice(0, limit);
